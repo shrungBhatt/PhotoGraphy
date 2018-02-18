@@ -16,4 +16,6 @@
     <string name="user_name">Username</string>
     <string name="retype_password">Retype password</string>
     <string name="phone_no">Phone no.</string>
+    <string name="no_tagged_photos">No tagged photos</string>
+    <string name="no_saved_photos">No saved photos</string>
 </resources>

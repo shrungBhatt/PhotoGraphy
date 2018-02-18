@@ -4,11 +4,19 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.projects.shrungbhatt.photography.R;
+
+import adapter.Adapter_PhotoView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import utils.ItemDecorationAlbumColumns;
 
 /**
  * Created by jigsaw on 18/2/18.
@@ -17,13 +25,33 @@ import com.projects.shrungbhatt.photography.R;
 public class Fragment_Favourite extends Fragment {
 
 
+    @BindView(R.id.favourite_recyclerview)
+    RecyclerView favouriteRecyclerview;
+    Unbinder unbinder;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_favourite,container,false);
+        View v = inflater.inflate(R.layout.fragment_favourite, container, false);
 
+
+        unbinder = ButterKnife.bind(this, v);
+
+        setUpRecyclerView();
 
         return v;
+    }
+
+    private void setUpRecyclerView(){
+        favouriteRecyclerview.setLayoutManager(new GridLayoutManager(getActivity(),3));
+        favouriteRecyclerview.addItemDecoration(new ItemDecorationAlbumColumns(1,3));
+        favouriteRecyclerview.setAdapter(new Adapter_PhotoView(getActivity()));
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }

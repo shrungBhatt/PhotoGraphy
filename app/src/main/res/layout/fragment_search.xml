@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:queryHint="Search for any photo..."
             android:background="@android:color/transparent"/>
+
     </android.support.v7.widget.Toolbar>
 
 

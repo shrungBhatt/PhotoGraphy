@@ -37,6 +37,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_email"
+                    android:textSize="@dimen/text_size_16"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"/>
 
@@ -53,6 +54,7 @@
                     android:hint="@string/prompt_password"
                     android:imeActionId="@+id/login"
                     android:imeActionLabel="@string/action_sign_in_short"
+                    android:textSize="@dimen/text_size_16"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
@@ -66,6 +68,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:textSize="@dimen/text_size_16"
+                android:backgroundTint="@color/colorPrimary"
+                android:textColor="@android:color/white"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold"/>
 
@@ -74,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/user_sign_up_button"
                 android:text="Don't Have a Account ? Sign up Here"
-                android:textColor="@android:color/holo_blue_light"
+                android:textColor="@color/colorAccent"
                 android:textSize="12sp"
                 android:background="@android:color/transparent"/>
 

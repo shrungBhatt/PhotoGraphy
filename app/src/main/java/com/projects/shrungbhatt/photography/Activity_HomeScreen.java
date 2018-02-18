@@ -50,12 +50,16 @@ public class Activity_HomeScreen extends AppCompatActivity implements
         homescreenTabLayout.addTab(homescreenTabLayout.newTab().setIcon(R.drawable.favourite));
         homescreenTabLayout.addTab(homescreenTabLayout.newTab().setIcon(R.drawable.profile));
         homescreenTabLayout.setOnTabSelectedListener(this);
+
+        mFragmentManager.beginTransaction().replace(R.id.homescreen_fragment_container,
+                new Fragment_Home()).commit();
     }
 
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
         int fragmentContainer = R.id.homescreen_fragment_container;
+
 
         switch (tab.getPosition()) {
 

@@ -17,12 +17,16 @@ import assets_bank.CategoriesBank;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import controller.Controller_FetchPhotoCategories;
+import model.BaseModel;
+import model.Req_PhotoCategories;
+import model.Res_PhotoCategories;
 
 /**
  * Created by jigsaw on 18/2/18.
  */
 
-public class Fragment_Home extends Fragment {
+public class Fragment_Home extends BaseFragment {
 
     @BindView(R.id.home_recycler_view)
     RecyclerView homeRecyclerView;
@@ -38,20 +42,48 @@ public class Fragment_Home extends Fragment {
 
         categoriesBank = new CategoriesBank(getActivity());
 
-        setUpRecyclerView();
+        fetchCategories();
+
+
 
         return v;
     }
 
 
     private void setUpRecyclerView(){
-        homeRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
-        homeRecyclerView.setAdapter(new Adapter_CategoriesRecyclerView(getActivity()));
+
     }
 
+
+    private void fetchCategories(){
+        Controller_FetchPhotoCategories controller_fetchPhotoCategories = new
+                Controller_FetchPhotoCategories();
+        Req_PhotoCategories req_photoCategories = new Req_PhotoCategories();
+        controller_fetchPhotoCategories.startFetching(this,req_photoCategories);
+
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void handleSuccessData(BaseModel resModel) {
+
+        if(resModel != null){
+            if(resModel instanceof Res_PhotoCategories){
+                Res_PhotoCategories res_photoCategories = (Res_PhotoCategories) resModel;
+                homeRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
+                homeRecyclerView.setAdapter(new Adapter_CategoriesRecyclerView(getActivity(),
+                        res_photoCategories.getList()));
+            }
+        }
+
+    }
+
+    @Override
+    public void handleZeroData(BaseModel reqModel) {
+
     }
 }

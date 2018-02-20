@@ -17,13 +17,14 @@ import adapter.Adapter_PhotoView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import model.BaseModel;
 import utils.ItemDecorationAlbumColumns;
 
 /**
  * Created by jigsaw on 18/2/18.
  */
 
-public class Fragment_Saved extends Fragment {
+public class Fragment_Saved extends BaseFragment {
 
 
     @BindView(R.id.profile_saved_recycler_view)
@@ -53,5 +54,15 @@ public class Fragment_Saved extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void handleSuccessData(BaseModel resModel) {
+
+    }
+
+    @Override
+    public void handleZeroData(BaseModel reqModel) {
+
     }
 }

@@ -16,12 +16,13 @@ import fragments.Fragment_Favourite;
 import fragments.Fragment_Home;
 import fragments.Fragment_Profile;
 import fragments.Fragment_Search;
+import model.BaseModel;
 
 /**
  * Created by jigsaw on 18/2/18.
  */
 
-public class Activity_HomeScreen extends AppCompatActivity implements
+public class Activity_HomeScreen extends BaseActivity implements
         TabLayout.OnTabSelectedListener {
 
 
@@ -95,6 +96,16 @@ public class Activity_HomeScreen extends AppCompatActivity implements
 
     @Override
     public void onTabReselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void handleSuccessData(BaseModel resModel) {
+
+    }
+
+    @Override
+    public void handleZeroData(BaseModel reqModel) {
 
     }
 }

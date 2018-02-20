@@ -11,8 +11,11 @@ import android.widget.TextView;
 
 import com.projects.shrungbhatt.photography.R;
 
+import java.util.ArrayList;
+
 import assets_bank.CategoriesBank;
 import butterknife.BindView;
+import model.Res_PhotoCategories;
 
 /**
  * Created by jigsaw on 18/2/18.
@@ -23,9 +26,11 @@ public class Adapter_CategoriesRecyclerView extends
 
     private Context mContext;
     private CategoriesBank categoriesBank;
+    private ArrayList<Res_PhotoCategories.List> mArrayList;
 
-    public Adapter_CategoriesRecyclerView(Context context){
+    public Adapter_CategoriesRecyclerView(Context context,ArrayList<Res_PhotoCategories.List> arrayList){
         mContext = context;
+        mArrayList = arrayList;
         categoriesBank = new CategoriesBank(context);
     }
 
@@ -39,9 +44,10 @@ public class Adapter_CategoriesRecyclerView extends
     public void onBindViewHolder(CategoriesViewHolder holder, int position) {
 
 //        Bitmap bitmap = categoriesBank.loadDrawable(mContext,"cars.jpg");
-        Bitmap bitmap = categoriesBank.loadDrawable("categories/animals.jpg");
+        Bitmap bitmap = categoriesBank.loadDrawable(mArrayList.get(position).getPhotoUrl());
 
         holder.listItemCategoryImage.setImageBitmap(bitmap);
+        holder.listItemCategoryName.setText(mArrayList.get(position).getPhotoCategory());
 
     }
 

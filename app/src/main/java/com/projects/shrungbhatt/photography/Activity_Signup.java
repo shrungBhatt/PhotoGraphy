@@ -23,8 +23,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import model.BaseModel;
 
-public class Activity_Signup extends AppCompatActivity implements Validator.ValidationListener {
+public class Activity_Signup extends BaseActivity implements Validator.ValidationListener {
 
     @NotEmpty
     @BindView(R.id.signup_user_name_edtTxt)
@@ -99,6 +100,16 @@ public class Activity_Signup extends AppCompatActivity implements Validator.Vali
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show();
             }
         }
+
+    }
+
+    @Override
+    public void handleSuccessData(BaseModel resModel) {
+
+    }
+
+    @Override
+    public void handleZeroData(BaseModel reqModel) {
 
     }
 }

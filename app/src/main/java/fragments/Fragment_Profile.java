@@ -18,12 +18,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import de.hdodenhof.circleimageview.CircleImageView;
+import model.BaseModel;
 
 /**
  * Created by jigsaw on 18/2/18.
  */
 
-public class Fragment_Profile extends Fragment implements TabLayout.OnTabSelectedListener {
+public class Fragment_Profile extends BaseFragment implements TabLayout.OnTabSelectedListener {
 
 
     @BindView(R.id.img_profile)
@@ -98,6 +99,16 @@ public class Fragment_Profile extends Fragment implements TabLayout.OnTabSelecte
 
     @Override
     public void onTabReselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void handleSuccessData(BaseModel resModel) {
+
+    }
+
+    @Override
+    public void handleZeroData(BaseModel reqModel) {
 
     }
 }

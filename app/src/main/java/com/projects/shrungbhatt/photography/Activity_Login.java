@@ -20,12 +20,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import model.BaseModel;
 
 /**
  * Created by jigsaw on 12/2/18.
  */
 
-public class Activity_Login extends AppCompatActivity implements Validator.ValidationListener {
+public class Activity_Login extends BaseActivity implements Validator.ValidationListener {
 
 
     @NotEmpty
@@ -83,5 +84,15 @@ public class Activity_Login extends AppCompatActivity implements Validator.Valid
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    @Override
+    public void handleSuccessData(BaseModel resModel) {
+
+    }
+
+    @Override
+    public void handleZeroData(BaseModel reqModel) {
+
     }
 }

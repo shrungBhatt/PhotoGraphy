@@ -31,7 +31,6 @@ public class Fragment_Home extends BaseFragment {
     @BindView(R.id.home_recycler_view)
     RecyclerView homeRecyclerView;
     Unbinder unbinder;
-    private CategoriesBank categoriesBank;
 
     @Nullable
     @Override
@@ -40,7 +39,6 @@ public class Fragment_Home extends BaseFragment {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this, v);
 
-        categoriesBank = new CategoriesBank(getActivity());
 
         fetchCategories();
 
@@ -50,9 +48,6 @@ public class Fragment_Home extends BaseFragment {
     }
 
 
-    private void setUpRecyclerView(){
-
-    }
 
 
     private void fetchCategories(){

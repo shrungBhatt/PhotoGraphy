@@ -1,6 +1,8 @@
 package adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import android.widget.TextView;
 
 import com.projects.shrungbhatt.photography.R;
 
+import assets_bank.CategoriesBank;
 import butterknife.BindView;
 
 /**
@@ -19,9 +22,11 @@ public class Adapter_CategoriesRecyclerView extends
         RecyclerView.Adapter<Adapter_CategoriesRecyclerView.CategoriesViewHolder> {
 
     private Context mContext;
+    private CategoriesBank categoriesBank;
 
     public Adapter_CategoriesRecyclerView(Context context){
         mContext = context;
+        categoriesBank = new CategoriesBank(context);
     }
 
     @Override
@@ -32,6 +37,11 @@ public class Adapter_CategoriesRecyclerView extends
 
     @Override
     public void onBindViewHolder(CategoriesViewHolder holder, int position) {
+
+//        Bitmap bitmap = categoriesBank.loadDrawable(mContext,"cars.jpg");
+        Bitmap bitmap = categoriesBank.loadDrawable("categories/animals.jpg");
+
+        holder.listItemCategoryImage.setImageBitmap(bitmap);
 
     }
 

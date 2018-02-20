@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.projects.shrungbhatt.photography.R;
 
 import adapter.Adapter_CategoriesRecyclerView;
+import assets_bank.CategoriesBank;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -26,6 +27,7 @@ public class Fragment_Home extends Fragment {
     @BindView(R.id.home_recycler_view)
     RecyclerView homeRecyclerView;
     Unbinder unbinder;
+    private CategoriesBank categoriesBank;
 
     @Nullable
     @Override
@@ -33,6 +35,8 @@ public class Fragment_Home extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this, v);
+
+        categoriesBank = new CategoriesBank(getActivity());
 
         setUpRecyclerView();
 

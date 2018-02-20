@@ -51,6 +51,17 @@ public class Res_Photos extends BaseModel {
         @SerializedName("photo_date")
         @Expose
         private String photoDate;
+        @SerializedName("photo_description")
+        @Expose
+        private String photoDescription;
+
+        public String getPhotoDescription() {
+            return photoDescription;
+        }
+
+        public void setPhotoDescription(String photoDescription) {
+            this.photoDescription = photoDescription;
+        }
 
         public String getId() {
             return id;

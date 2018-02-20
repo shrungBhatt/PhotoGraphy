@@ -1,12 +1,15 @@
 package adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.projects.shrungbhatt.photography.Activity_PhotoDetails;
 import com.projects.shrungbhatt.photography.R;
 
 import java.util.ArrayList;
@@ -37,10 +40,17 @@ public class Adapter_PhotoView extends RecyclerView.Adapter<Adapter_PhotoView.Ph
     }
 
     @Override
-    public void onBindViewHolder(PhotoHolder holder, int position) {
+    public void onBindViewHolder(PhotoHolder holder, final int position) {
 
         Bitmap bitmap = photosBank.loadDrawable(mPhotosList.get(position).getPhotoUrl());
         holder.mPhoto.setImageBitmap(bitmap);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mContext.startActivity(Activity_PhotoDetails.newIntent(mContext,
+                        mPhotosList,position));
+            }
+        });
 
     }
 

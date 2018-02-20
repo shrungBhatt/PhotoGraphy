@@ -47,7 +47,7 @@ public class Fragment_Favourite extends BaseFragment {
     private void setUpRecyclerView(){
         favouriteRecyclerview.setLayoutManager(new GridLayoutManager(getActivity(),3));
         favouriteRecyclerview.addItemDecoration(new ItemDecorationAlbumColumns(1,3));
-        favouriteRecyclerview.setAdapter(new Adapter_PhotoView(getActivity()));
+//        favouriteRecyclerview.setAdapter(new Adapter_PhotoView(getActivity()));
     }
 
     @Override

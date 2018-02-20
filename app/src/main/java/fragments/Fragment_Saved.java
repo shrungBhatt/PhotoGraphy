@@ -47,7 +47,7 @@ public class Fragment_Saved extends BaseFragment {
     private void setUpRecyclerView() {
         profileSavedRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
         profileSavedRecyclerView.addItemDecoration(new ItemDecorationAlbumColumns(1,3));
-        profileSavedRecyclerView.setAdapter(new Adapter_PhotoView(getActivity()));
+//        profileSavedRecyclerView.setAdapter(new Adapter_PhotoView(getActivity()));
     }
 
     @Override

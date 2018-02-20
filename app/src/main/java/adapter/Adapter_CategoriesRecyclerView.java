@@ -43,7 +43,6 @@ public class Adapter_CategoriesRecyclerView extends
     @Override
     public void onBindViewHolder(CategoriesViewHolder holder, int position) {
 
-//        Bitmap bitmap = categoriesBank.loadDrawable(mContext,"cars.jpg");
         Bitmap bitmap = categoriesBank.loadDrawable(mArrayList.get(position).getPhotoUrl());
 
         holder.listItemCategoryImage.setImageBitmap(bitmap);
@@ -53,7 +52,7 @@ public class Adapter_CategoriesRecyclerView extends
 
     @Override
     public int getItemCount() {
-        return 4;
+        return mArrayList.size();
     }
 
     class CategoriesViewHolder extends RecyclerView.ViewHolder {

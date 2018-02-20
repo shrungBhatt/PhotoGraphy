@@ -17,7 +17,10 @@ import adapter.Adapter_PhotoView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import controller.Controller_FetchTaggedPhotos;
 import model.BaseModel;
+import model.Req_PhotosTagged;
+import model.Res_Photos;
 import utils.ItemDecorationAlbumColumns;
 
 /**
@@ -40,17 +43,13 @@ public class Fragment_Tagged extends BaseFragment {
         View v = inflater.inflate(R.layout.fragment_tagged, container, false);
         unbinder = ButterKnife.bind(this, v);
 
-        setUpRecyclerView();
 
+        fetchTaggedPhotos();
 
         return v;
     }
 
-    private void setUpRecyclerView() {
-        profileTaggedRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
-        profileTaggedRecyclerView.addItemDecoration(new ItemDecorationAlbumColumns(1,3));
-        profileTaggedRecyclerView.setAdapter(new Adapter_PhotoView(getActivity()));
-    }
+
 
     @Override
     public void onDestroyView() {
@@ -58,8 +57,26 @@ public class Fragment_Tagged extends BaseFragment {
         unbinder.unbind();
     }
 
+
+    private void fetchTaggedPhotos(){
+        Controller_FetchTaggedPhotos controller_fetchTaggedPhotos = new
+                Controller_FetchTaggedPhotos();
+        Req_PhotosTagged req_photosTagged = new Req_PhotosTagged();
+        req_photosTagged.setmUserName("shrung");
+        controller_fetchTaggedPhotos.startFetching(this,req_photosTagged);
+    }
+
     @Override
     public void handleSuccessData(BaseModel resModel) {
+
+        if(resModel != null){
+            if(resModel instanceof Res_Photos){
+                Res_Photos res_photos = (Res_Photos) resModel;
+                profileTaggedRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
+                profileTaggedRecyclerView.addItemDecoration(new ItemDecorationAlbumColumns(1,3));
+                profileTaggedRecyclerView.setAdapter(new Adapter_PhotoView(getActivity(),res_photos.getList()));
+            }
+        }
 
     }
 

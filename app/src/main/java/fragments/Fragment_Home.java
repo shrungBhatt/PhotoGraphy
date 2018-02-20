@@ -39,10 +39,7 @@ public class Fragment_Home extends BaseFragment {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this, v);
 
-
         fetchCategories();
-
-
 
         return v;
     }

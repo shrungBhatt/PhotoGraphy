@@ -1,12 +1,18 @@
 package adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.projects.shrungbhatt.photography.R;
+
+import java.util.ArrayList;
+
+import assets_bank.PhotosBank;
+import model.Res_Photos;
 
 /**
  * Created by jigsaw on 18/2/18.
@@ -15,9 +21,13 @@ import com.projects.shrungbhatt.photography.R;
 public class Adapter_PhotoView extends RecyclerView.Adapter<Adapter_PhotoView.PhotoHolder>{
 
     private Context mContext;
+    private ArrayList<Res_Photos.List> mPhotosList;
+    private PhotosBank photosBank;
 
-    public Adapter_PhotoView(Context context){
+    public Adapter_PhotoView(Context context,ArrayList<Res_Photos.List> photosList){
         mContext = context;
+        mPhotosList = photosList;
+        photosBank = new PhotosBank(context);
     }
 
     @Override
@@ -29,11 +39,14 @@ public class Adapter_PhotoView extends RecyclerView.Adapter<Adapter_PhotoView.Ph
     @Override
     public void onBindViewHolder(PhotoHolder holder, int position) {
 
+        Bitmap bitmap = photosBank.loadDrawable(mPhotosList.get(position).getPhotoUrl());
+        holder.mPhoto.setImageBitmap(bitmap);
+
     }
 
     @Override
     public int getItemCount() {
-        return 15;
+        return mPhotosList.size();
     }
 
     class PhotoHolder extends RecyclerView.ViewHolder{

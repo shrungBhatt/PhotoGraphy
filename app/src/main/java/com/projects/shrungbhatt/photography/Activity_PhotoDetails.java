@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -15,9 +16,12 @@ import assets_bank.PhotosBank;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import controller.Contoller_AddSaveAndFavrt;
 import de.hdodenhof.circleimageview.CircleImageView;
 import listeners.Listener_PhotoSelected;
 import model.BaseModel;
+import model.Req_AddSaveAndFavrt;
+import model.Res_AddSaveAndFavrt;
 import model.Res_Photos;
 
 /**
@@ -77,8 +81,39 @@ public class Activity_PhotoDetails extends BaseActivity implements Listener_Phot
 
     }
 
+
+    private void saveAndLikePhoto(String fragmentCallBack){
+        Contoller_AddSaveAndFavrt contoller_addSaveAndFavrt = new Contoller_AddSaveAndFavrt();
+
+        Req_AddSaveAndFavrt req_AddSaveAndFavrt = new Req_AddSaveAndFavrt();
+        req_AddSaveAndFavrt.setmFragmentCallBack(fragmentCallBack);
+        req_AddSaveAndFavrt.setmUserName("shrung");
+        req_AddSaveAndFavrt.setmPhotoName(mPhotosList.get(mArrayPosition).getPhotoName());
+        req_AddSaveAndFavrt.setmPhotoUrl(mPhotosList.get(mArrayPosition).getPhotoUrl());
+        req_AddSaveAndFavrt.setmPhotoDesc(mPhotosList.get(mArrayPosition).getPhotoDescription());
+        req_AddSaveAndFavrt.setmPhotoTagged(mPhotosList.get(mArrayPosition).getPhotoTagged());
+        req_AddSaveAndFavrt.setmPhotoLikes(mPhotosList.get(mArrayPosition).getPhotoLikes());
+        req_AddSaveAndFavrt.setmPhotoCategory(mPhotosList.get(mArrayPosition).getPhotoCategory());
+        req_AddSaveAndFavrt.setmPhotoAuthor(mPhotosList.get(mArrayPosition).getPhotoAuthor());
+        req_AddSaveAndFavrt.setmPhotoDate(mPhotosList.get(mArrayPosition).getPhotoDate());
+
+        contoller_addSaveAndFavrt.startFetching(this,req_AddSaveAndFavrt);
+    }
+
     @Override
     public void handleSuccessData(BaseModel resModel) {
+
+        if(resModel!=null){
+            if(resModel instanceof Res_AddSaveAndFavrt){
+                Res_AddSaveAndFavrt res_addSaveAndFavrt = (Res_AddSaveAndFavrt) resModel;
+                if(res_addSaveAndFavrt.getResult().
+                        equalsIgnoreCase("Insert Successful")){
+                    Toast.makeText(this,"Successful",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(this,"Something went wrong",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
 
     }
 
@@ -91,8 +126,12 @@ public class Activity_PhotoDetails extends BaseActivity implements Listener_Phot
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.photo_details_save_btn:
+                saveAndLikePhoto("Save");
+                Toast.makeText(this,"Saving Photo...",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.photo_details_favourite:
+                saveAndLikePhoto("Like");
+                Toast.makeText(this,"Saving Photo...",Toast.LENGTH_SHORT).show();
                 break;
         }
     }

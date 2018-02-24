@@ -1,6 +1,11 @@
 package retrofit;
 
 
+import com.mobsandgeeks.saripaar.annotation.Url;
+
+import retrofit.http.Field;
+import retrofit.http.FormUrlEncoded;
+import retrofit.http.POST;
 import utils.URLGenerator;
 import retrofit.http.GET;
 import retrofit.http.Query;
@@ -25,4 +30,30 @@ public interface APIManager {
 
     @GET(URLGenerator.FETCH_FAVOURITE_PHOTOS)
     void getFavouritePhotos(@Query("user_name")String userName,Callback<String> callback);
+
+    @FormUrlEncoded
+    @POST(URLGenerator.SAVE_PHOTOS)
+    void savePhoto(@Field("username")String userName,
+                    @Field("photo_name")String photoName,
+                    @Field("photo_url")String photoUrl,
+                    @Field("photo_description")String photoDesc,
+                    @Field("photo_tagged")String photoTagged,
+                    @Field("photo_likes")String photoLikes,
+                    @Field("photo_category")String photoCategory,
+                    @Field("photo_author")String photoAuthor,
+                    @Field("photo_date")String photoDate,
+                    Callback<String> callback);
+
+    @FormUrlEncoded
+    @POST(URLGenerator.LIKE_PHOTOS)
+    void likePhoto(@Field("username")String userName,
+                   @Field("photo_name")String photoName,
+                   @Field("photo_url")String photoUrl,
+                   @Field("photo_description")String photoDesc,
+                   @Field("photo_tagged")String photoTagged,
+                   @Field("photo_likes")String photoLikes,
+                   @Field("photo_category")String photoCategory,
+                   @Field("photo_author")String photoAuthor,
+                   @Field("photo_date")String photoDate,
+                   Callback<String> callback);
 }

@@ -24,4 +24,10 @@ public class URLGenerator {
     //Url endpoint used to fetch the user saved photos.
     public static final String FETCH_SAVED_PHOTOS = "/fetch_saved_photos.php";
 
+    //Url endpoint used to save the user selected photos.
+    public static final String SAVE_PHOTOS = "/photography_save_photo.php";
+
+    //Url endpoint used to add the liked photos.
+    public static final String LIKE_PHOTOS = "/photography_like_photo.php";
+
 }

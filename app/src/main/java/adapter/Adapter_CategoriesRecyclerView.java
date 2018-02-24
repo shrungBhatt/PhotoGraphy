@@ -5,10 +5,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.projects.shrungbhatt.photography.Activity_PhotosByCategory;
 import com.projects.shrungbhatt.photography.R;
 
 import java.util.ArrayList;
@@ -41,12 +43,20 @@ public class Adapter_CategoriesRecyclerView extends
     }
 
     @Override
-    public void onBindViewHolder(CategoriesViewHolder holder, int position) {
+    public void onBindViewHolder(CategoriesViewHolder holder, final int position) {
 
         Bitmap bitmap = categoriesBank.loadDrawable(mArrayList.get(position).getPhotoUrl());
 
         holder.listItemCategoryImage.setImageBitmap(bitmap);
         holder.listItemCategoryName.setText(mArrayList.get(position).getPhotoCategory());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mContext.startActivity(Activity_PhotosByCategory.
+                        newIntent(mContext,mArrayList.get(position).getPhotoCategory()));
+            }
+        });
 
     }
 

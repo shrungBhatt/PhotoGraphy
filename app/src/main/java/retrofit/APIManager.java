@@ -56,4 +56,7 @@ public interface APIManager {
                    @Field("photo_author")String photoAuthor,
                    @Field("photo_date")String photoDate,
                    Callback<String> callback);
+
+    @GET(URLGenerator.FETCH_BY_CATEGORIES)
+    void fetchByCategories(@Query("category")String category,Callback<String> callback);
 }

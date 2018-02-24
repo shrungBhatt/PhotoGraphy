@@ -30,4 +30,7 @@ public class URLGenerator {
     //Url endpoint used to add the liked photos.
     public static final String LIKE_PHOTOS = "/photography_like_photo.php";
 
+    //Url enpoint used to fetch photos by categories.
+    public static final String FETCH_BY_CATEGORIES = "/fetch_photo_by_category.php";
+
 }

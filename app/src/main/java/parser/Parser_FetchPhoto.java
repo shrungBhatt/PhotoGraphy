@@ -11,7 +11,7 @@ import model.Res_Photos;
  * Created by jigsaw on 20/2/18.
  */
 
-public class Parser_FetchPhotoByQuery extends BaseParser {
+public class Parser_FetchPhoto extends BaseParser {
     @Override
     public BaseModel doParsing(JSONObject jsonObject) {
         Gson gson = new Gson();

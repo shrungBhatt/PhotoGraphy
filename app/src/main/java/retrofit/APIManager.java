@@ -18,6 +18,11 @@ public interface APIManager {
     void getPhotos(@Query("query") String query,Callback<String> callback);
 
     @GET(URLGenerator.FETCH_TAGGED_PHOTOS)
-    void getTaggedPhotos(@Query("username")String userName,Callback<String> callback);
+    void getTaggedPhotos(@Query("query")String userName,Callback<String> callback);
 
+    @GET(URLGenerator.FETCH_SAVED_PHOTOS)
+    void getSavedPhotos(@Query("user_name")String userName,Callback<String> callback);
+
+    @GET(URLGenerator.FETCH_FAVOURITE_PHOTOS)
+    void getFavouritePhotos(@Query("user_name")String userName,Callback<String> callback);
 }

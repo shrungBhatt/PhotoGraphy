@@ -1,6 +1,7 @@
 package com.projects.shrungbhatt.photography;
 
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Toast;
 
 import controller.CallBackListner;
@@ -33,5 +34,9 @@ public abstract class BaseActivity extends AppCompatActivity implements CallBack
     }
     public void showToastMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public void backPress(View view){
+        onBackPressed();
     }
 }

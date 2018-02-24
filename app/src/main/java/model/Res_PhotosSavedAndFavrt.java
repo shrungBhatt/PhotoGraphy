@@ -6,10 +6,10 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 /**
- * Created by jigsaw on 20/2/18.
+ * Created by jigsaw on 24/2/18.
  */
 
-public class Res_Photos extends BaseModel {
+public class Res_PhotosSavedAndFavrt extends BaseModel {
 
     @SerializedName("list")
     @Expose
@@ -22,7 +22,6 @@ public class Res_Photos extends BaseModel {
     public void setList(ArrayList<List> list) {
         this.list = list;
     }
-
 
 
     public class List extends BaseModel {
@@ -39,6 +38,9 @@ public class Res_Photos extends BaseModel {
         @SerializedName("photo_url")
         @Expose
         private String photoUrl;
+        @SerializedName("photo_description")
+        @Expose
+        private String photoDescription;
         @SerializedName("photo_tagged")
         @Expose
         private String photoTagged;
@@ -54,26 +56,6 @@ public class Res_Photos extends BaseModel {
         @SerializedName("photo_date")
         @Expose
         private String photoDate;
-        @SerializedName("photo_description")
-        @Expose
-        private String photoDescription;
-
-        public String getPhotoDescription() {
-            return photoDescription;
-        }
-
-        public void setPhotoDescription(String photoDescription) {
-            this.photoDescription = photoDescription;
-        }
-
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
 
         public String getId() {
             return id;
@@ -81,6 +63,14 @@ public class Res_Photos extends BaseModel {
 
         public void setId(String id) {
             this.id = id;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
         }
 
         public String getPhotoName() {
@@ -97,6 +87,14 @@ public class Res_Photos extends BaseModel {
 
         public void setPhotoUrl(String photoUrl) {
             this.photoUrl = photoUrl;
+        }
+
+        public String getPhotoDescription() {
+            return photoDescription;
+        }
+
+        public void setPhotoDescription(String photoDescription) {
+            this.photoDescription = photoDescription;
         }
 
         public String getPhotoTagged() {

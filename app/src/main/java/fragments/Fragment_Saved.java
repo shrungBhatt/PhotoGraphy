@@ -17,7 +17,10 @@ import adapter.Adapter_PhotoView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import controller.Controller_PhotosSavedAndFavrt;
 import model.BaseModel;
+import model.Req_PhotosSavedAndFavrt;
+import model.Res_Photos;
 import utils.ItemDecorationAlbumColumns;
 
 /**
@@ -41,13 +44,23 @@ public class Fragment_Saved extends BaseFragment {
 
         setUpRecyclerView();
 
+        fetchSavedPhotos("shrung");
+
         return v;
     }
 
     private void setUpRecyclerView() {
         profileSavedRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
         profileSavedRecyclerView.addItemDecoration(new ItemDecorationAlbumColumns(1,3));
-//        profileSavedRecyclerView.setAdapter(new Adapter_PhotoView(getActivity()));
+    }
+
+    private void fetchSavedPhotos(String userName){
+        Controller_PhotosSavedAndFavrt controller_photosSavedAndFavrt = new Controller_PhotosSavedAndFavrt();
+        Req_PhotosSavedAndFavrt req_photosSavedAndFavrt = new Req_PhotosSavedAndFavrt();
+        req_photosSavedAndFavrt.setmFragmentCallBack("Saved");
+        req_photosSavedAndFavrt.setmUserName(userName);
+        controller_photosSavedAndFavrt.startFetching(this,req_photosSavedAndFavrt);
+
     }
 
     @Override
@@ -58,6 +71,16 @@ public class Fragment_Saved extends BaseFragment {
 
     @Override
     public void handleSuccessData(BaseModel resModel) {
+
+        if (resModel != null) {
+            if(resModel instanceof Res_Photos){
+                Res_Photos res_photosSavedAndFavrt = (Res_Photos) resModel;
+                profileSavedRecyclerView.setAdapter(new Adapter_PhotoView(getActivity(),res_photosSavedAndFavrt.getList()));
+
+
+            }
+
+        }
 
     }
 

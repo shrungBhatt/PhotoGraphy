@@ -1,5 +1,6 @@
 package fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.projects.shrungbhatt.photography.Activity_Login;
 import com.projects.shrungbhatt.photography.R;
 
 import adapter.Adapter_CategoriesRecyclerView;
@@ -21,6 +23,7 @@ import controller.Controller_FetchPhotoCategories;
 import model.BaseModel;
 import model.Req_PhotoCategories;
 import model.Res_PhotoCategories;
+import utils.MySharedPreferences;
 
 /**
  * Created by jigsaw on 18/2/18.
@@ -78,4 +81,7 @@ public class Fragment_Home extends BaseFragment {
     public void handleZeroData(BaseModel reqModel) {
 
     }
+
+
+
 }

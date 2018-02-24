@@ -23,6 +23,7 @@ import model.BaseModel;
 import model.Req_AddSaveAndFavrt;
 import model.Res_Result;
 import model.Res_Photos;
+import utils.MySharedPreferences;
 
 /**
  * Created by jigsaw on 20/2/18.
@@ -87,7 +88,7 @@ public class Activity_PhotoDetails extends BaseActivity implements Listener_Phot
 
         Req_AddSaveAndFavrt req_AddSaveAndFavrt = new Req_AddSaveAndFavrt();
         req_AddSaveAndFavrt.setmFragmentCallBack(fragmentCallBack);
-        req_AddSaveAndFavrt.setmUserName("shrung");
+        req_AddSaveAndFavrt.setmUserName(MySharedPreferences.getStoredUsername(this));
         req_AddSaveAndFavrt.setmPhotoName(mPhotosList.get(mArrayPosition).getPhotoName());
         req_AddSaveAndFavrt.setmPhotoUrl(mPhotosList.get(mArrayPosition).getPhotoUrl());
         req_AddSaveAndFavrt.setmPhotoDesc(mPhotosList.get(mArrayPosition).getPhotoDescription());
@@ -131,7 +132,7 @@ public class Activity_PhotoDetails extends BaseActivity implements Listener_Phot
                 break;
             case R.id.photo_details_favourite:
                 saveAndLikePhoto("Like");
-                Toast.makeText(this,"Saving Photo...",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Adding to favourites...",Toast.LENGTH_SHORT).show();
                 break;
         }
     }

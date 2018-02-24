@@ -1,5 +1,6 @@
 package com.projects.shrungbhatt.photography;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,7 +23,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import controller.Controller_LogOnUser;
 import model.BaseModel;
+import model.Req_LogOnUser;
+import model.Res_Result;
+import utils.MySharedPreferences;
 
 /**
  * Created by jigsaw on 12/2/18.
@@ -33,11 +38,9 @@ public class Activity_Login extends BaseActivity implements Validator.Validation
 
     private static final int REQUEST_SIGNUP = 1001;
     @NotEmpty
-    @Email
     @BindView(R.id.user_email)
     AutoCompleteTextView userEmail;
     @NotEmpty
-    @Password(min = 6, scheme = Password.Scheme.ANY)
     @BindView(R.id.user_password)
     EditText userPassword;
     @BindView(R.id.email_sign_in_button)
@@ -45,6 +48,8 @@ public class Activity_Login extends BaseActivity implements Validator.Validation
     @BindView(R.id.user_sign_up_button)
     Button userSignUpButton;
 
+    public static Boolean mActive;
+    public static Activity mActivity;
     Validator mValidator;
 
     @Override
@@ -52,6 +57,17 @@ public class Activity_Login extends BaseActivity implements Validator.Validation
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+
+        mActivity = this;
+
+        //To check whether the user is logged in or not.
+        boolean status = MySharedPreferences.getStoredLoginStatus(this);
+        if (status) {
+            Intent i;
+            i = new Intent(this, Activity_HomeScreen.class);
+
+            startActivity(i);
+        }
 
         mValidator = new Validator(this);
         mValidator.setValidationListener(this);
@@ -64,17 +80,28 @@ public class Activity_Login extends BaseActivity implements Validator.Validation
                 mValidator.validate();
                 break;
             case R.id.user_sign_up_button:
-                startActivityForResult(new Intent(this,Activity_Signup.class),
+                startActivityForResult(new Intent(this, Activity_Signup.class),
                         REQUEST_SIGNUP);
                 break;
         }
     }
 
+
     @Override
     public void onValidationSucceeded() {
-        Toast.makeText(this, "Yay! we got it right!", Toast.LENGTH_SHORT).show();
+        logonUser();
 
     }
+
+    private void logonUser() {
+        Controller_LogOnUser controller_logOnUser = new Controller_LogOnUser();
+        Req_LogOnUser req_logOnUser = new Req_LogOnUser();
+        req_logOnUser.setmUserName(userEmail.getText().toString());
+        req_logOnUser.setmPassword(userPassword.getText().toString());
+
+        controller_logOnUser.startFetching(this, req_logOnUser);
+    }
+
 
     @Override
     public void onValidationFailed(List<ValidationError> errors) {
@@ -93,11 +120,37 @@ public class Activity_Login extends BaseActivity implements Validator.Validation
 
     @Override
     public void handleSuccessData(BaseModel resModel) {
+        if (resModel != null) {
+            if (resModel instanceof Res_Result) {
+                Res_Result res_result = (Res_Result) resModel;
+                if (res_result.getResult().equalsIgnoreCase("Success")) {
+                    MySharedPreferences.setStoredUsername(this, userEmail.getText().toString());
+                    MySharedPreferences.setStoredLoginStatus(this, true);
+                    startActivity(new Intent(this, Activity_HomeScreen.class));
+                    finish();
+                }else{
+                    Toast.makeText(this,res_result.getResult(),Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
 
     }
 
     @Override
     public void handleZeroData(BaseModel reqModel) {
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mActive = true;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mActive = false;
     }
 }

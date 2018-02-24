@@ -6,6 +6,7 @@ import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -17,6 +18,7 @@ import fragments.Fragment_Home;
 import fragments.Fragment_Profile;
 import fragments.Fragment_Search;
 import model.BaseModel;
+import utils.MySharedPreferences;
 
 /**
  * Created by jigsaw on 18/2/18.
@@ -26,6 +28,7 @@ public class Activity_HomeScreen extends BaseActivity implements
         TabLayout.OnTabSelectedListener {
 
 
+    private static final String TAG = "Activity_HomeScreen";
     @BindView(R.id.homescreen_fragment_container)
     FrameLayout homescreenFragmentContainer;
 
@@ -38,6 +41,16 @@ public class Activity_HomeScreen extends BaseActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homescreen);
         ButterKnife.bind(this);
+
+        try {
+            if (MySharedPreferences.getStoredLoginStatus(this) &&
+                    Activity_Login.mActive) {
+
+                Activity_Login.mActivity.finish();
+            }
+        }catch (Exception e){
+            Log.e(TAG,e.toString());
+        }
 
         mFragmentManager = getSupportFragmentManager();
 

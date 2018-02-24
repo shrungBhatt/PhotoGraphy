@@ -69,4 +69,10 @@ public interface APIManager {
                       @Field("phone_no")String phoneNo,
                       @Field("dob")String dob,
                       Callback<String> callback);
+
+    @FormUrlEncoded
+    @POST(URLGenerator.LOGIN_IN)
+    void logOnUser(@Field("username")String userName,
+                   @Field("password")String password,
+                   Callback<String> callback);
 }

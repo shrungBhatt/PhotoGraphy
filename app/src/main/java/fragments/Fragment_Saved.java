@@ -22,6 +22,7 @@ import model.BaseModel;
 import model.Req_PhotosSavedAndFavrt;
 import model.Res_Photos;
 import utils.ItemDecorationAlbumColumns;
+import utils.MySharedPreferences;
 
 /**
  * Created by jigsaw on 18/2/18.
@@ -44,7 +45,7 @@ public class Fragment_Saved extends BaseFragment {
 
         setUpRecyclerView();
 
-        fetchSavedPhotos("shrung");
+        fetchSavedPhotos(MySharedPreferences.getStoredUsername(getActivity()));
 
         return v;
     }

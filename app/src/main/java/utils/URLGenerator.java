@@ -36,4 +36,7 @@ public class URLGenerator {
     //Url endpoint used to register the user to the db.
     public static final String REGISTER_USER = "/register_photography_user.php";
 
+    //Url endpoint used to log on user.
+    public static final String LOGIN_IN = "/photography_user_login.php";
+
 }

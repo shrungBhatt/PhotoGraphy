@@ -55,7 +55,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_size_16"
-                    android:hint="@string/user_name"
+                    android:hint="Email"
                     android:inputType="text"
                     android:maxLines="1"/>
 

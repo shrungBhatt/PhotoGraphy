@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import de.hdodenhof.circleimageview.CircleImageView;
 import model.BaseModel;
+import utils.MySharedPreferences;
 
 /**
  * Created by jigsaw on 18/2/18.
@@ -49,6 +50,8 @@ public class Fragment_Profile extends BaseFragment implements TabLayout.OnTabSel
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        profileUsername.setText(MySharedPreferences.getStoredUsername(getActivity()));
 
         setUpTabLayout();
 

@@ -1,5 +1,6 @@
 package com.projects.shrungbhatt.photography;
 
+import android.net.ConnectivityManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
@@ -38,5 +39,14 @@ public abstract class BaseActivity extends AppCompatActivity implements CallBack
 
     public void backPress(View view){
         onBackPressed();
+    }
+
+    private boolean isNetworkAvailableAndConnected () {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+
+        boolean isNetworkAvailable = cm.getActiveNetworkInfo() != null;
+
+        return isNetworkAvailable &&
+                cm.getActiveNetworkInfo().isConnected();
     }
 }

@@ -22,6 +22,7 @@ import model.BaseModel;
 import model.Req_PhotosTagged;
 import model.Res_Photos;
 import utils.ItemDecorationAlbumColumns;
+import utils.MySharedPreferences;
 
 /**
  * Created by jigsaw on 18/2/18.
@@ -62,7 +63,7 @@ public class Fragment_Tagged extends BaseFragment {
         Controller_FetchTaggedPhotos controller_fetchTaggedPhotos = new
                 Controller_FetchTaggedPhotos();
         Req_PhotosTagged req_photosTagged = new Req_PhotosTagged();
-        req_photosTagged.setmUserName("shrung");
+        req_photosTagged.setmUserName(MySharedPreferences.getStoredUsername(getActivity()));
         controller_fetchTaggedPhotos.startFetching(this,req_photosTagged);
     }
 

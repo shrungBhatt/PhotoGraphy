@@ -19,4 +19,10 @@
     <string name="no_tagged_photos">No tagged photos</string>
     <string name="no_saved_photos">No saved photos</string>
     <string name="description">Description:</string>
+
+    <string-array name="type_of_gender">
+        <item>Select Category</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
 </resources>

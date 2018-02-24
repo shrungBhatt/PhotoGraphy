@@ -59,4 +59,14 @@ public interface APIManager {
 
     @GET(URLGenerator.FETCH_BY_CATEGORIES)
     void fetchByCategories(@Query("category")String category,Callback<String> callback);
+
+    @FormUrlEncoded
+    @POST(URLGenerator.REGISTER_USER)
+    void registerUser(@Field("username")String userName,
+                      @Field("email_id")String emailId,
+                      @Field("password")String password,
+                      @Field("gender")String gender,
+                      @Field("phone_no")String phoneNo,
+                      @Field("dob")String dob,
+                      Callback<String> callback);
 }

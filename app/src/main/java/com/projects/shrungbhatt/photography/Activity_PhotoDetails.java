@@ -21,7 +21,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import listeners.Listener_PhotoSelected;
 import model.BaseModel;
 import model.Req_AddSaveAndFavrt;
-import model.Res_AddSaveAndFavrt;
+import model.Res_Result;
 import model.Res_Photos;
 
 /**
@@ -104,9 +104,9 @@ public class Activity_PhotoDetails extends BaseActivity implements Listener_Phot
     public void handleSuccessData(BaseModel resModel) {
 
         if(resModel!=null){
-            if(resModel instanceof Res_AddSaveAndFavrt){
-                Res_AddSaveAndFavrt res_addSaveAndFavrt = (Res_AddSaveAndFavrt) resModel;
-                if(res_addSaveAndFavrt.getResult().
+            if(resModel instanceof Res_Result){
+                Res_Result res_result = (Res_Result) resModel;
+                if(res_result.getResult().
                         equalsIgnoreCase("Insert Successful")){
                     Toast.makeText(this,"Successful",Toast.LENGTH_SHORT).show();
                 }else{

@@ -1,5 +1,7 @@
 package com.projects.shrungbhatt.photography;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +31,7 @@ import model.BaseModel;
 public class Activity_Login extends BaseActivity implements Validator.ValidationListener {
 
 
+    private static final int REQUEST_SIGNUP = 1001;
     @NotEmpty
     @Email
     @BindView(R.id.user_email)
@@ -61,6 +64,8 @@ public class Activity_Login extends BaseActivity implements Validator.Validation
                 mValidator.validate();
                 break;
             case R.id.user_sign_up_button:
+                startActivityForResult(new Intent(this,Activity_Signup.class),
+                        REQUEST_SIGNUP);
                 break;
         }
     }

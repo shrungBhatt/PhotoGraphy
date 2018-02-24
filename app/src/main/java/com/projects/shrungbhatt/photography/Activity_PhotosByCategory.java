@@ -16,9 +16,6 @@ import model.Req_FetchPhotoByCategory;
 import model.Res_Photos;
 import utils.ItemDecorationAlbumColumns;
 
-/**
- * Created by jigsaw on 25/2/18.
- */
 
 public class Activity_PhotosByCategory extends BaseActivity {
 

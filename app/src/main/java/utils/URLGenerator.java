@@ -33,4 +33,7 @@ public class URLGenerator {
     //Url enpoint used to fetch photos by categories.
     public static final String FETCH_BY_CATEGORIES = "/fetch_photo_by_category.php";
 
+    //Url endpoint used to register the user to the db.
+    public static final String REGISTER_USER = "/register_photography_user.php";
+
 }

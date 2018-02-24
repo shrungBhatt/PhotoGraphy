@@ -4,9 +4,9 @@ import org.json.JSONObject;
 
 import model.BaseModel;
 import model.Req_AddSaveAndFavrt;
-import model.Res_AddSaveAndFavrt;
+import model.Res_Result;
 import parser.BaseParser;
-import parser.Parser_AddSaveAndFavrt;
+import parser.Parser_Result;
 
 /**
  * Created by jigsaw on 24/2/18.
@@ -15,9 +15,9 @@ import parser.Parser_AddSaveAndFavrt;
 public class Contoller_AddSaveAndFavrt extends BaseController {
     @Override
     public void onPopulate(JSONObject objJson, BaseParser baseParser) {
-        Parser_AddSaveAndFavrt parserAddSaveAndFavrt = (Parser_AddSaveAndFavrt) baseParser;
-        Res_AddSaveAndFavrt res_addSaveAndFavrt = (Res_AddSaveAndFavrt) parserAddSaveAndFavrt.doParsing(objJson);
-        callBackListner.handleSuccessData(res_addSaveAndFavrt);
+        Parser_Result parserAddSaveAndFavrt = (Parser_Result) baseParser;
+        Res_Result res_result = (Res_Result) parserAddSaveAndFavrt.doParsing(objJson);
+        callBackListner.handleSuccessData(res_result);
     }
 
 
@@ -26,7 +26,7 @@ public class Contoller_AddSaveAndFavrt extends BaseController {
         super.startFetching(callBackListner, model);
 
         this.reqModel = model;
-        this.baseParser = new Parser_AddSaveAndFavrt();
+        this.baseParser = new Parser_Result();
         Req_AddSaveAndFavrt req_addSaveAndFavrt = (Req_AddSaveAndFavrt) reqModel;
         switch (req_addSaveAndFavrt.getmFragmentCallBack()) {
 

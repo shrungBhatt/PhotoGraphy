@@ -19,7 +19,7 @@ public class URLGenerator {
     public static final String FETCH_TAGGED_PHOTOS = "/fetch_photos_tagged.php";
 
     //Url endpoint used to fetch the user favourite photos.
-    public static final String FETCH_FAVOURITE_PHOTOS = "/fetch_favourite_photos.php";
+    public static final String FETCH_FAVOURITE_PHOTOS = "/fetch_favourite_photo_data.php";
 
     //Url endpoint used to fetch the user saved photos.
     public static final String FETCH_SAVED_PHOTOS = "/fetch_saved_photos.php";

@@ -6,7 +6,6 @@ import org.json.JSONObject;
 
 import model.BaseModel;
 import model.Res_Photos;
-import model.Res_PhotosSavedAndFavrt;
 
 /**
  * Created by jigsaw on 24/2/18.

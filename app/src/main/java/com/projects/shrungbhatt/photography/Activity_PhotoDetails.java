@@ -41,16 +41,18 @@ public class Activity_PhotoDetails extends BaseActivity implements Listener_Phot
     ImageView photoDetailsFavourite;
     @BindView(R.id.photo_details_description_tv)
     TextView photoDetailsDescriptionTv;
+    @BindView(R.id.photo_detail_photo_name)
+    TextView photoDetailPhotoName;
 
     private PhotosBank photosBank;
     private int mArrayPosition;
     private ArrayList<Res_Photos.List> mPhotosList;
 
     public static Intent newIntent(Context context, ArrayList<Res_Photos.List> arrayList,
-                                   int position){
-        Intent intent = new Intent(context,Activity_PhotoDetails.class);
-        intent.putExtra(EXTRA_ARRAY,arrayList);
-        intent.putExtra(EXTRA_POSITION,position);
+                                   int position) {
+        Intent intent = new Intent(context, Activity_PhotoDetails.class);
+        intent.putExtra(EXTRA_ARRAY, arrayList);
+        intent.putExtra(EXTRA_POSITION, position);
         return intent;
     }
 
@@ -63,12 +65,14 @@ public class Activity_PhotoDetails extends BaseActivity implements Listener_Phot
         photosBank = new PhotosBank(this);
 
         mPhotosList = (ArrayList<Res_Photos.List>) getIntent().getSerializableExtra(EXTRA_ARRAY);
-        mArrayPosition = getIntent().getIntExtra(EXTRA_POSITION,0);
+        mArrayPosition = getIntent().getIntExtra(EXTRA_POSITION, 0);
 
         Bitmap bitmap = photosBank.loadDrawable(mPhotosList.get(mArrayPosition).getPhotoUrl());
         photoDetailImageView.setImageBitmap(bitmap);
 
         photoDetailAuthor.setText(mPhotosList.get(mArrayPosition).getPhotoAuthor());
+
+        photoDetailPhotoName.setText(mPhotosList.get(mArrayPosition).getPhotoName());
 
 
     }

@@ -5,7 +5,6 @@ import org.json.JSONObject;
 import model.BaseModel;
 import model.Req_PhotosSavedAndFavrt;
 import model.Res_Photos;
-import model.Res_PhotosSavedAndFavrt;
 import parser.BaseParser;
 import parser.Parser_PhotosSavedAndFavrt;
 

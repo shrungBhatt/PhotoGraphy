@@ -21,7 +21,7 @@
             android:id="@+id/homescreen_tab_layout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/toolbar_height"
-            app:tabIndicatorColor="@android:color/black"/>
+            app:tabIndicatorColor="@color/colorAccent" />
 
 
 

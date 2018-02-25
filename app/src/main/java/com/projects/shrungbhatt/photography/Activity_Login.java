@@ -125,9 +125,15 @@ public class Activity_Login extends BaseActivity implements Validator.Validation
                 Res_Result res_result = (Res_Result) resModel;
                 if (res_result.getResult().equalsIgnoreCase("Success")) {
                     MySharedPreferences.setStoredUsername(this, userEmail.getText().toString());
-                    MySharedPreferences.setStoredLoginStatus(this, true);
-                    startActivity(new Intent(this, Activity_HomeScreen.class));
-                    finish();
+                    if(userEmail.getText().toString().equalsIgnoreCase("admin")){
+                        MySharedPreferences.setIsAdminLoggedOn(this,true);
+                        startActivity(new Intent(this,Activity_AdminHomeScreen.class));
+                        finish();
+                    }else {
+                        MySharedPreferences.setStoredLoginStatus(this, true);
+                        startActivity(new Intent(this, Activity_HomeScreen.class));
+                        finish();
+                    }
                 }else{
                     Toast.makeText(this,res_result.getResult(),Toast.LENGTH_SHORT).show();
                 }

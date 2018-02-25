@@ -58,12 +58,24 @@ public abstract class BaseActivity extends AppCompatActivity implements CallBack
         if(isNetworkAvailableAndConnected()) {
             MySharedPreferences.setStoredLoginStatus(this, false);
             startActivity(new Intent(this, Activity_Login.class));
-
+            Toast.makeText(this, "Logged Out", Toast.LENGTH_SHORT).show();
             finish();
         }else{
-            showToastMessage("Not connected to internet");
+            showToastMessage("No Internet Connection");
         }
+    }
 
-
+    public void logOutAdmin(View view){
+        if(isNetworkAvailableAndConnected()){
+            MySharedPreferences.setStoredLoginStatus(this,false);
+            MySharedPreferences.setIsAdminLoggedOn(this,false);
+            Intent i = new Intent(this, Activity_Login.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(i);
+            Toast.makeText(this, "Logged Out", Toast.LENGTH_SHORT).show();
+            finish();
+        }else {
+            Toast.makeText(this,"No Internet Connection",Toast.LENGTH_SHORT).show();
+        }
     }
 }

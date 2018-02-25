@@ -132,7 +132,7 @@ public class Activity_PhotoDetails extends BaseActivity implements Listener_Phot
                 break;
             case R.id.photo_details_favourite:
                 saveAndLikePhoto("Like");
-                Toast.makeText(this,"Adding to favourites...",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Adding to favourites..",Toast.LENGTH_SHORT).show();
                 break;
         }
     }

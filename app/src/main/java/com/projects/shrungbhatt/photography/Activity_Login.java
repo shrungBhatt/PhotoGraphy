@@ -64,8 +64,11 @@ public class Activity_Login extends BaseActivity implements Validator.Validation
         boolean status = MySharedPreferences.getStoredLoginStatus(this);
         if (status) {
             Intent i;
-            i = new Intent(this, Activity_HomeScreen.class);
-
+            if (MySharedPreferences.isAdminLoggedOn(this)) {
+                i = new Intent(this, Activity_AdminHomeScreen.class);
+            } else {
+                i = new Intent(this, Activity_HomeScreen.class);
+            }
             startActivity(i);
         }
 
@@ -127,6 +130,7 @@ public class Activity_Login extends BaseActivity implements Validator.Validation
                     MySharedPreferences.setStoredUsername(this, userEmail.getText().toString());
                     if(userEmail.getText().toString().equalsIgnoreCase("admin")){
                         MySharedPreferences.setIsAdminLoggedOn(this,true);
+                        MySharedPreferences.setStoredLoginStatus(this, true);
                         startActivity(new Intent(this,Activity_AdminHomeScreen.class));
                         finish();
                     }else {

@@ -92,10 +92,11 @@ public interface APIManager {
                     @Field("inquiry_message")String inquiryMessage,
                     @Field("inquiry_date")String inquiryDate,
                     Callback<String> callback);
+
+
     @FormUrlEncoded
     @POST(URLGenerator.ADD_CATEGORY)
     void addCategory(@Field("photo_category")String category,
                      @Field("photo_url")String imageUrl,
-                     @Field("create_date")String createDate,
                      Callback<String> callback);
 }

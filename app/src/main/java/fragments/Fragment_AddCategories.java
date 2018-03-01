@@ -23,6 +23,9 @@ public class Fragment_AddCategories extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_add_categories,container,false);
 
+
+
+
         return v;
     }
 

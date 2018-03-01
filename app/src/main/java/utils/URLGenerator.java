@@ -45,4 +45,9 @@ public class URLGenerator {
     //Url endpoint used to quote an inquiry.
     public static final String QUOTE_INQUIRY_LIST = "/photography_quote_inquiry.php";
 
+    //Url endpoint used to add category to the server/
+    public static final String ADD_CATEGORY = "/photography_add_category.php";
+
+
+
 }

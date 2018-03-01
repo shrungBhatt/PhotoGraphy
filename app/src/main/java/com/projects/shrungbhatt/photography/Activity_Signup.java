@@ -121,7 +121,6 @@ public class Activity_Signup extends BaseActivity implements Validator.Validatio
         cal.set(year, month, day);
         Date date = cal.getTime();
 
-//        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
         return sdf.format(date);

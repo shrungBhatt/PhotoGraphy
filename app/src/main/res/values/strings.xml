@@ -21,6 +21,7 @@
     <string name="description">Description:</string>
     <string name="quote_message">Quote Message:</string>
     <string name="likes">Likes:</string>
+    <string name="add_category">Category name</string>
 
     <string-array name="type_of_gender">
         <item>Select Category</item>

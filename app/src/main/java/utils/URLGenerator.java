@@ -39,7 +39,10 @@ public class URLGenerator {
     //Url endpoint used to log on user.
     public static final String LOGIN_IN = "/photography_user_login.php";
 
+    //Url endpoint used to fetch an inquiry.
+    public static final String FETCH_INQUIRY_LIST = "/fetch_photo_inquires.php";
+
     //Url endpoint used to quote an inquiry.
-    public static final String QUOTE_INQUIRY_LIST = "/fetch_photo_inquires.php";
+    public static final String QUOTE_INQUIRY_LIST = "/photography_quote_inquiry.php";
 
 }

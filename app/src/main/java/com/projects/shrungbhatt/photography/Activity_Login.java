@@ -70,6 +70,7 @@ public class Activity_Login extends BaseActivity implements Validator.Validation
                 i = new Intent(this, Activity_HomeScreen.class);
             }
             startActivity(i);
+            finish();
         }
 
         mValidator = new Validator(this);

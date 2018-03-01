@@ -138,7 +138,7 @@ public class Activity_PhotoDetails extends BaseActivity implements Listener_Phot
                 Toast.makeText(this, "Adding to favourites..", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.photo_details_quote_inquiry:
-
+                startActivity(Activity_QuoteInquiry.newIntent(this,mPhotosList,mArrayPosition));
                 break;
         }
     }

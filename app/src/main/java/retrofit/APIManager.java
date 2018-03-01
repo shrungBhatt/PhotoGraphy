@@ -75,6 +75,21 @@ public interface APIManager {
                    @Field("password")String password,
                    Callback<String> callback);
 
-    @GET(URLGenerator.QUOTE_INQUIRY_LIST)
+    @GET(URLGenerator.FETCH_INQUIRY_LIST)
     void getInquires(Callback<String> callback);
+
+    @FormUrlEncoded
+    @POST(URLGenerator.QUOTE_INQUIRY_LIST)
+    void addInquiry(@Field("username")String userName,
+                    @Field("photo_name")String photoName,
+                    @Field("photo_url")String photoUrl,
+                    @Field("photo_description")String photoDesc,
+                    @Field("photo_tagged")String photo_tagged,
+                    @Field("photo_likes")String photoLikes,
+                    @Field("photo_category")String photoCategory,
+                    @Field("photo_author")String photoAuthor,
+                    @Field("photo_date")String photoDate,
+                    @Field("inquiry_message")String inquiryMessage,
+                    @Field("inquiry_date")String inquiryDate,
+                    Callback<String> callback);
 }

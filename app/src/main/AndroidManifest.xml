@@ -58,6 +58,11 @@
             android:parentActivityName=".Activity_AdminHomeScreen"/>
 
 
+        <activity android:name=".Activity_QuoteInquiry"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:parentActivityName=".Activity_PhotoDetails"/>
+
     </application>
 
 </manifest>

@@ -36,6 +36,9 @@ public class Res_Photos extends BaseModel {
         @SerializedName("photo_name")
         @Expose
         private String photoName;
+        @SerializedName("inquiry_message")
+        @Expose
+        private String inquiryMessage;
         @SerializedName("photo_url")
         @Expose
         private String photoUrl;
@@ -57,6 +60,28 @@ public class Res_Photos extends BaseModel {
         @SerializedName("photo_description")
         @Expose
         private String photoDescription;
+        @SerializedName("inquiry_date")
+        @Expose
+        private String inquiryDate;
+        @SerializedName("inquiry_author")
+        @Expose
+        private String inquiryAuthor;
+
+        public String getInquiryAuthor() {
+            return inquiryAuthor;
+        }
+
+        public void setInquiryAuthor(String inquiryAuthor) {
+            this.inquiryAuthor = inquiryAuthor;
+        }
+
+        public String getInquiryDate() {
+            return inquiryDate;
+        }
+
+        public void setInquiryDate(String inquiryDate) {
+            this.inquiryDate = inquiryDate;
+        }
 
         public String getPhotoDescription() {
             return photoDescription;
@@ -66,6 +91,14 @@ public class Res_Photos extends BaseModel {
             this.photoDescription = photoDescription;
         }
 
+
+        public String getInquiryMessage() {
+            return inquiryMessage;
+        }
+
+        public void setInquiryMessage(String inquiryMessage) {
+            this.inquiryMessage = inquiryMessage;
+        }
 
         public String getUsername() {
             return username;

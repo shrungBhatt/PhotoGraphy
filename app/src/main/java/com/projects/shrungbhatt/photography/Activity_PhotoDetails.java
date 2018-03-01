@@ -21,8 +21,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import listeners.Listener_PhotoSelected;
 import model.BaseModel;
 import model.Req_AddSaveAndFavrt;
-import model.Res_Result;
 import model.Res_Photos;
+import model.Res_Result;
 import utils.MySharedPreferences;
 
 /**
@@ -48,6 +48,8 @@ public class Activity_PhotoDetails extends BaseActivity implements Listener_Phot
     TextView photoDetailsDescriptionTv;
     @BindView(R.id.photo_detail_photo_name)
     TextView photoDetailPhotoName;
+    @BindView(R.id.photo_details_quote_inquiry)
+    ImageView mPhotoDetailsQuoteInquiry;
 
     private PhotosBank photosBank;
     private int mArrayPosition;
@@ -83,7 +85,7 @@ public class Activity_PhotoDetails extends BaseActivity implements Listener_Phot
     }
 
 
-    private void saveAndLikePhoto(String fragmentCallBack){
+    private void saveAndLikePhoto(String fragmentCallBack) {
         Contoller_AddSaveAndFavrt contoller_addSaveAndFavrt = new Contoller_AddSaveAndFavrt();
 
         Req_AddSaveAndFavrt req_AddSaveAndFavrt = new Req_AddSaveAndFavrt();
@@ -98,20 +100,20 @@ public class Activity_PhotoDetails extends BaseActivity implements Listener_Phot
         req_AddSaveAndFavrt.setmPhotoAuthor(mPhotosList.get(mArrayPosition).getPhotoAuthor());
         req_AddSaveAndFavrt.setmPhotoDate(mPhotosList.get(mArrayPosition).getPhotoDate());
 
-        contoller_addSaveAndFavrt.startFetching(this,req_AddSaveAndFavrt);
+        contoller_addSaveAndFavrt.startFetching(this, req_AddSaveAndFavrt);
     }
 
     @Override
     public void handleSuccessData(BaseModel resModel) {
 
-        if(resModel!=null){
-            if(resModel instanceof Res_Result){
+        if (resModel != null) {
+            if (resModel instanceof Res_Result) {
                 Res_Result res_result = (Res_Result) resModel;
-                if(res_result.getResult().
-                        equalsIgnoreCase("Insert Successful")){
-                    Toast.makeText(this,"Successful",Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(this,"Something went wrong",Toast.LENGTH_SHORT).show();
+                if (res_result.getResult().
+                        equalsIgnoreCase("Insert Successful")) {
+                    Toast.makeText(this, "Successful", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -123,16 +125,20 @@ public class Activity_PhotoDetails extends BaseActivity implements Listener_Phot
 
     }
 
-    @OnClick({R.id.photo_details_save_btn, R.id.photo_details_favourite})
+    @OnClick({R.id.photo_details_save_btn, R.id.photo_details_favourite,
+            R.id.photo_details_quote_inquiry})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.photo_details_save_btn:
                 saveAndLikePhoto("Save");
-                Toast.makeText(this,"Saving Photo...",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Saving Photo...", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.photo_details_favourite:
                 saveAndLikePhoto("Like");
-                Toast.makeText(this,"Adding to favourites..",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Adding to favourites..", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.photo_details_quote_inquiry:
+
                 break;
         }
     }
@@ -141,4 +147,5 @@ public class Activity_PhotoDetails extends BaseActivity implements Listener_Phot
     public void photoSelected(ArrayList<Res_Photos.List> arrayList, int position) {
 
     }
+
 }

@@ -1,7 +1,6 @@
 package retrofit;
 
 
-import com.mobsandgeeks.saripaar.annotation.Url;
 
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
@@ -75,4 +74,7 @@ public interface APIManager {
     void logOnUser(@Field("username")String userName,
                    @Field("password")String password,
                    Callback<String> callback);
+
+    @GET(URLGenerator.QUOTE_INQUIRY_LIST)
+    void getInquires(Callback<String> callback);
 }

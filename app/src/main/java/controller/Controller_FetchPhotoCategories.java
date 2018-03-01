@@ -27,7 +27,6 @@ public class Controller_FetchPhotoCategories extends BaseController {
 
         this.reqModel = model;
         this.baseParser = new Parser_FetchPhotoCategories();
-//        Req_PhotoCategories req_photoCategories = (Req_PhotoCategories) reqModel;
         apiManager.getPhotoCategories(callback);
 
     }

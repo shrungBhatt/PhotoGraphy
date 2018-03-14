@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
-public class SplashScreenActivity extends AppCompatActivity {
+import model.BaseModel;
+
+public class SplashScreenActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,4 +26,13 @@ public class SplashScreenActivity extends AppCompatActivity {
         }, 1000);
     }
 
+    @Override
+    public void handleSuccessData(BaseModel resModel) {
+
+    }
+
+    @Override
+    public void handleZeroData(BaseModel reqModel) {
+
+    }
 }

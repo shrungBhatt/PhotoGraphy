@@ -49,9 +49,6 @@ public abstract class BaseController {
     APIManager apiManager;
     Context context;
     Dialog mProgressDialog;
-
-
-
     Callback<String> callback = new Callback<String>() {
         @Override
         public void success(String responseData, Response response) {
@@ -73,6 +70,7 @@ public abstract class BaseController {
             Log.e(TAG, "Error " + error.getMessage());
         }
     };
+
 
     public void startFetching(CallBackListner callBackListner, BaseModel model) {
         this.callBackListner = callBackListner;
@@ -124,9 +122,10 @@ public abstract class BaseController {
             this.mProgressDialog = new Dialog(baseActivity);
         } else if (callBackListner instanceof BaseFragment) {
             BaseFragment baseFragment = (BaseFragment) callBackListner;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                context = baseFragment.getContext();
+            context = baseFragment.getContext();
+            if (baseFragment.getActivity() != null) {
                 this.mProgressDialog = new Dialog(baseFragment.getActivity());
+
             }
         }
         mProgressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

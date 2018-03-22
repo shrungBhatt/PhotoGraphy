@@ -29,8 +29,8 @@ public class Controller_AddCategories extends BaseController {
         this.reqModel = model;
         this.baseParser = new Parser_Result();
         Req_AddCategories req_addCategories = (Req_AddCategories) model;
-        apiManager.addCategory(req_addCategories.getPhotoCategory(),
-                req_addCategories.getPhotoUrl(),callback);
+        apiManager.addCategory(req_addCategories.getPhotoCategory()
+                ,req_addCategories.getImage(),callback);
 
     }
 }

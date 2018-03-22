@@ -7,7 +7,7 @@ package model;
 public class Req_AddCategories extends BaseModel {
 
     private String mPhotoCategory;
-    private String mPhotoUrl;
+    private String mImage;
 
     public String getPhotoCategory() {
         return mPhotoCategory;
@@ -17,11 +17,12 @@ public class Req_AddCategories extends BaseModel {
         mPhotoCategory = photoCategory;
     }
 
-    public String getPhotoUrl() {
-        return mPhotoUrl;
+
+    public String getImage() {
+        return mImage;
     }
 
-    public void setPhotoUrl(String photoUrl) {
-        mPhotoUrl = photoUrl;
+    public void setImage(String image) {
+        mImage = image;
     }
 }

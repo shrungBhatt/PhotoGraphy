@@ -78,4 +78,6 @@ public abstract class BaseActivity extends AppCompatActivity implements CallBack
             Toast.makeText(this,"No Internet Connection",Toast.LENGTH_SHORT).show();
         }
     }
+
+
 }

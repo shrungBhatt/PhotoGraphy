@@ -97,6 +97,6 @@ public interface APIManager {
     @FormUrlEncoded
     @POST(URLGenerator.ADD_CATEGORY)
     void addCategory(@Field("photo_category")String category,
-                     @Field("photo_url")String imageUrl,
+                     @Field("image")String image,
                      Callback<String> callback);
 }

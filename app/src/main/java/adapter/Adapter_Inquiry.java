@@ -53,7 +53,7 @@ public class Adapter_Inquiry extends RecyclerView.Adapter<Adapter_Inquiry.Inquir
         holder.mListItemLikesCount.setText(Converter.
                 localeConverter(Integer.valueOf(mInquiriesList.get(position).getPhotoLikes())));
         holder.mPhotoNameTv.setText(mInquiriesList.get(position).getPhotoName());
-        holder.mInquiryAuthor.setText(mInquiriesList.get(position).getPhotoAuthor());
+        holder.mInquiryAuthor.setText(mInquiriesList.get(position).getInquiryAuthor());
 
 
     }

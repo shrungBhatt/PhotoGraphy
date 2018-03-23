@@ -1,22 +1,19 @@
 package com.projects.shrungbhatt.photography;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
-import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
-import com.mobsandgeeks.saripaar.annotation.Password;
 
 import java.util.List;
 
@@ -27,6 +24,7 @@ import controller.Controller_LogOnUser;
 import model.BaseModel;
 import model.Req_LogOnUser;
 import model.Res_Result;
+import utils.Const;
 import utils.MySharedPreferences;
 
 /**
@@ -51,6 +49,8 @@ public class Activity_Login extends BaseActivity implements Validator.Validation
     public static Boolean mActive;
     public static Activity mActivity;
     Validator mValidator;
+    @BindView(R.id.sign_in_as_photographer)
+    CheckBox mSignInAsPhotographer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -93,15 +93,20 @@ public class Activity_Login extends BaseActivity implements Validator.Validation
 
     @Override
     public void onValidationSucceeded() {
-        logonUser();
+        if(mSignInAsPhotographer.isChecked()){
+            logonUser(Const.USER_TYPE_PHOTOGRAPHER);
+        }else {
+            logonUser(Const.USER_TYPE_USER);
+        }
 
     }
 
-    private void logonUser() {
+    private void logonUser(String userType) {
         Controller_LogOnUser controller_logOnUser = new Controller_LogOnUser();
         Req_LogOnUser req_logOnUser = new Req_LogOnUser();
         req_logOnUser.setmUserName(userEmail.getText().toString());
         req_logOnUser.setmPassword(userPassword.getText().toString());
+        req_logOnUser.setUserType(userType);
 
         controller_logOnUser.startFetching(this, req_logOnUser);
     }
@@ -129,18 +134,18 @@ public class Activity_Login extends BaseActivity implements Validator.Validation
                 Res_Result res_result = (Res_Result) resModel;
                 if (res_result.getResult().equalsIgnoreCase("Success")) {
                     MySharedPreferences.setStoredUsername(this, userEmail.getText().toString());
-                    if(userEmail.getText().toString().equalsIgnoreCase("admin")){
-                        MySharedPreferences.setIsAdminLoggedOn(this,true);
+                    if (mSignInAsPhotographer.isChecked()) {
+                        MySharedPreferences.setIsAdminLoggedOn(this, true);
                         MySharedPreferences.setStoredLoginStatus(this, true);
-                        startActivity(new Intent(this,Activity_AdminHomeScreen.class));
+                        startActivity(new Intent(this, Activity_AdminHomeScreen.class));
                         finish();
-                    }else {
+                    } else {
                         MySharedPreferences.setStoredLoginStatus(this, true);
                         startActivity(new Intent(this, Activity_HomeScreen.class));
                         finish();
                     }
-                }else{
-                    Toast.makeText(this,res_result.getResult(),Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, res_result.getResult(), Toast.LENGTH_SHORT).show();
                 }
             }
         }

@@ -28,7 +28,7 @@ public class Controller_LogOnUser extends BaseController {
         this.baseParser = new Parser_Result();
         Req_LogOnUser req_logOnUser = (Req_LogOnUser) reqModel;
         apiManager.logOnUser(req_logOnUser.getmUserName(),
-                req_logOnUser.getmPassword(),
+                req_logOnUser.getmPassword(),req_logOnUser.getUserType(),
                 callback);
     }
 }

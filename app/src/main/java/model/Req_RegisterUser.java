@@ -12,6 +12,15 @@ public class Req_RegisterUser extends BaseModel {
     private String mGender;
     private String mPhoneNo;
     private String mDob;
+    private String mUserType;
+
+    public String getUserType() {
+        return mUserType;
+    }
+
+    public void setUserType(String userType) {
+        mUserType = userType;
+    }
 
     public String getmUsername() {
         return mUsername;

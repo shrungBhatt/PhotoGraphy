@@ -7,6 +7,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.Checked;
 import com.mobsandgeeks.saripaar.annotation.ConfirmPassword;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Length;
@@ -32,12 +34,16 @@ import controller.Controller_RegisterUser;
 import model.BaseModel;
 import model.Req_RegisterUser;
 import model.Res_Result;
+import utils.Const;
 
 public class Activity_Signup extends BaseActivity implements Validator.ValidationListener,
         AdapterView.OnItemSelectedListener {
 
     private static final int REQUEST_DATE = 0;
     private static final String DIALOG_DATE = "dialog_date";
+
+    @BindView(R.id.sign_up_as_photographer)
+    CheckBox mSignUpAsPhotographer;
     private int mYear, mMonth, mDay;
     Calendar calender;
 
@@ -92,7 +98,7 @@ public class Activity_Signup extends BaseActivity implements Validator.Validatio
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.signup_dob_button:
-               datePickerDialog();
+                datePickerDialog();
                 break;
             case R.id.signup_button:
                 mValidator.validate();
@@ -128,7 +134,13 @@ public class Activity_Signup extends BaseActivity implements Validator.Validatio
 
     @Override
     public void onValidationSucceeded() {
-        registerUser();
+
+        if(mSignUpAsPhotographer.isChecked()){
+            registerUser(Const.USER_TYPE_PHOTOGRAPHER);
+        }else{
+            registerUser(Const.USER_TYPE_USER);
+        }
+
     }
 
     @Override
@@ -156,31 +168,32 @@ public class Activity_Signup extends BaseActivity implements Validator.Validatio
         spinner.setOnItemSelectedListener(this);
     }
 
-    private void registerUser() {
+    private void registerUser(String userType) {
         Controller_RegisterUser controller_registerUser = new Controller_RegisterUser();
         Req_RegisterUser req_registerUser = new Req_RegisterUser();
         req_registerUser.setmUsername(signupUserNameEdtTxt.getText().toString());
         req_registerUser.setmEmailId(signupUserEmailEdtTxt.getText().toString());
         req_registerUser.setmGender(mGender);
+        req_registerUser.setUserType(userType);
         req_registerUser.setmPassword(signupPasswordEdtTxt.getText().toString());
         req_registerUser.setmPhoneNo(signupPhoneNoEdtTxt.getText().toString());
         req_registerUser.setmDob(signupDobButton.getText().toString());
 
-        controller_registerUser.startFetching(this,req_registerUser);
+        controller_registerUser.startFetching(this, req_registerUser);
     }
 
     @Override
     public void handleSuccessData(BaseModel resModel) {
 
-        if(resModel != null){
-            if(resModel instanceof Res_Result){
-                Res_Result res_result = (Res_Result)resModel;
-                if(res_result.getResult().equalsIgnoreCase("Insert Successful")){
-                    Toast.makeText(this,res_result.getResult(),Toast.LENGTH_SHORT).show();
+        if (resModel != null) {
+            if (resModel instanceof Res_Result) {
+                Res_Result res_result = (Res_Result) resModel;
+                if (res_result.getResult().equalsIgnoreCase("Insert Successful")) {
+                    Toast.makeText(this, res_result.getResult(), Toast.LENGTH_SHORT).show();
                     setResult(RESULT_OK);
                     finish();
-                }else{
-                    Toast.makeText(this,res_result.getResult(),Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, res_result.getResult(), Toast.LENGTH_SHORT).show();
                 }
             }
         }

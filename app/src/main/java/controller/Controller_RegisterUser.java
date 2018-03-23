@@ -35,6 +35,7 @@ public class Controller_RegisterUser extends BaseController {
                 req_registerUser.getmGender(),
                 req_registerUser.getmPhoneNo(),
                 req_registerUser.getmDob(),
+                req_registerUser.getUserType(),
                 callback);
     }
 }

@@ -67,12 +67,14 @@ public interface APIManager {
                       @Field("gender")String gender,
                       @Field("phone_no")String phoneNo,
                       @Field("dob")String dob,
+                      @Field("user_type")String userType,
                       Callback<String> callback);
 
     @FormUrlEncoded
     @POST(URLGenerator.LOGIN_IN)
     void logOnUser(@Field("username")String userName,
                    @Field("password")String password,
+                   @Field("user_type")String userType,
                    Callback<String> callback);
 
     @GET(URLGenerator.FETCH_INQUIRY_LIST)

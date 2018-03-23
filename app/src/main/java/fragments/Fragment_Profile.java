@@ -66,7 +66,6 @@ public class Fragment_Profile extends BaseFragment implements TabLayout.OnTabSel
     }
 
     private void setUpTabLayout() {
-        profileTablayout.addTab(profileTablayout.newTab().setText("Tagged"));
         profileTablayout.addTab(profileTablayout.newTab().setText("Saved"));
         profileTablayout.setOnTabSelectedListener(this);
 
@@ -83,12 +82,12 @@ public class Fragment_Profile extends BaseFragment implements TabLayout.OnTabSel
 
         switch (tab.getPosition()) {
 
-            case 0:
+            /*case 0:
                 mFragmentManager.beginTransaction().replace(fragmentContainer,
                         new Fragment_Tagged()).commit();
-                break;
+                break;*/
 
-            case 1:
+            case 0:
                 mFragmentManager.beginTransaction().replace(fragmentContainer,
                         new Fragment_Saved()).commit();
                 break;

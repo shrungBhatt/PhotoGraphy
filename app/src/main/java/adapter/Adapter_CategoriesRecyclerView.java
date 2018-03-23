@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.projects.shrungbhatt.photography.Activity_PhotosByCategory;
 import com.projects.shrungbhatt.photography.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -30,7 +31,7 @@ public class Adapter_CategoriesRecyclerView extends
     private CategoriesBank categoriesBank;
     private ArrayList<Res_PhotoCategories.List> mArrayList;
 
-    public Adapter_CategoriesRecyclerView(Context context,ArrayList<Res_PhotoCategories.List> arrayList){
+    public Adapter_CategoriesRecyclerView(Context context, ArrayList<Res_PhotoCategories.List> arrayList) {
         mContext = context;
         mArrayList = arrayList;
         categoriesBank = new CategoriesBank(context);
@@ -39,22 +40,27 @@ public class Adapter_CategoriesRecyclerView extends
     @Override
     public CategoriesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        return new CategoriesViewHolder(inflater,parent);
+        return new CategoriesViewHolder(inflater, parent);
     }
 
     @Override
     public void onBindViewHolder(CategoriesViewHolder holder, final int position) {
 
-        Bitmap bitmap = categoriesBank.loadDrawable(mArrayList.get(position).getPhotoUrl());
+//        Bitmap bitmap = categoriesBank.loadDrawable(mArrayList.get(position).getPhotoUrl());
 
-        holder.listItemCategoryImage.setImageBitmap(bitmap);
+//        holder.listItemCategoryImage.setImageBitmap(bitmap);
+
+        Picasso.get().load(mArrayList.get(position).getPhotoUrl()).
+                placeholder(mContext.getResources().getDrawable(R.drawable.no_image)).
+                into(holder.listItemCategoryImage);
+
         holder.listItemCategoryName.setText(mArrayList.get(position).getPhotoCategory());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mContext.startActivity(Activity_PhotosByCategory.
-                        newIntent(mContext,mArrayList.get(position).getPhotoCategory()));
+                        newIntent(mContext, mArrayList.get(position).getPhotoCategory()));
             }
         });
 

@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.projects.shrungbhatt.photography.R;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 import assets_bank.PhotosBank;
 import butterknife.BindView;
@@ -32,6 +34,9 @@ public class Adapter_Inquiry extends RecyclerView.Adapter<Adapter_Inquiry.Inquir
         mContext = context;
         mInquiriesList = list;
         photosBank = new PhotosBank(context);
+        if(mInquiriesList != null) {
+            Collections.reverse(mInquiriesList);
+        }
     }
 
 

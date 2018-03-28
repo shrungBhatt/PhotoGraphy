@@ -141,7 +141,7 @@
                     android:layout_toLeftOf="@id/photo_details_save_btn"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:src="@drawable/favourite"/>
+                    android:src="@drawable/liked_inactive"/>
 
 
 

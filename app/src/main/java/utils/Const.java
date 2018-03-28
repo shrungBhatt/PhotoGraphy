@@ -12,4 +12,12 @@ public class Const {
     public static final String USER_TYPE_PHOTOGRAPHER = "1";
 
     public static final String USER_TYPE_USER = "0";
+
+    public static final String RES_FETCH_LIKE_DETAIL_TRUE = "1";
+
+    public static final String RES_FETCH_LIKE_DETAIL_FALSE = "0";
+
+    public static final String RES_DELETE_LIKE_SAVED_PHOTO_TRUE  = "Deleted";
+
+    public static final String RES_DELETE_LIKE_SAVED_PHOTO_FALSE = "Error";
 }

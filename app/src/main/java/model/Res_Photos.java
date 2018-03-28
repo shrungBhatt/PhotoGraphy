@@ -66,6 +66,16 @@ public class Res_Photos extends BaseModel {
         @SerializedName("inquiry_author")
         @Expose
         private String inquiryAuthor;
+        @SerializedName("is_selected")
+        private boolean isSelected;
+
+        public boolean isSelected() {
+            return isSelected;
+        }
+
+        public void setSelected(boolean selected) {
+            isSelected = selected;
+        }
 
         public String getInquiryAuthor() {
             return inquiryAuthor;

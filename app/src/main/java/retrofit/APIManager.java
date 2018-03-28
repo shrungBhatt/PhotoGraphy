@@ -101,4 +101,22 @@ public interface APIManager {
     void addCategory(@Field("photo_category")String category,
                      @Field("image")String image,
                      Callback<String> callback);
+
+    @FormUrlEncoded
+    @POST(URLGenerator.FETCH_PHOTO_DETAILS)
+    void fetchPhotoDetails(@Field("id")String id,
+                           @Field("username")String userName,
+                           Callback<String> callback);
+
+    @FormUrlEncoded
+    @POST(URLGenerator.DELETE_LIKED_PHOTOS)
+    void deleteLikedPhotos(@Field("user_name")String userName,
+                           @Field("photo_name")String photoName,
+                           Callback<String> callback);
+
+    @FormUrlEncoded
+    @POST(URLGenerator.DELETE_SAVED_PHOTOS)
+    void deleteSavedPhotos(@Field("user_name")String userName,
+                           @Field("photo_name")String photoName,
+                           Callback<String> callback);
 }

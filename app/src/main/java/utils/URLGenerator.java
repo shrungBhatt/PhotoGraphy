@@ -48,6 +48,11 @@ public class URLGenerator {
     //Url endpoint used to add category to the server/
     public static final String ADD_CATEGORY = "/photography_add_category.php";
 
+    //Url endpoint used to fetch the details of selected photos.
+    public static final String FETCH_PHOTO_DETAILS = "/fetch_photo_details.php";
 
+    //Url enpoint used to delete the like photo
+    public static final String DELETE_LIKED_PHOTOS = "/delete_saved_liked_photos.php";
 
+    public static final String DELETE_SAVED_PHOTOS = "/delete_saved_photos.php";
 }

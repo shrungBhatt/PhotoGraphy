@@ -17,12 +17,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import controller.Contoller_AddSaveAndFavrt;
+import controller.Controller_DeleteSavedAndFavrt;
+import controller.Controller_FetchPhotoDetails;
 import de.hdodenhof.circleimageview.CircleImageView;
 import listeners.Listener_PhotoSelected;
 import model.BaseModel;
 import model.Req_AddSaveAndFavrt;
+import model.Req_DeleteSavedAndLiked;
+import model.Req_FetchPhotoDetails;
 import model.Res_Photos;
 import model.Res_Result;
+import utils.Const;
 import utils.MySharedPreferences;
 
 /**
@@ -54,6 +59,7 @@ public class Activity_PhotoDetails extends BaseActivity implements Listener_Phot
     private PhotosBank photosBank;
     private int mArrayPosition;
     private ArrayList<Res_Photos.List> mPhotosList;
+    private boolean mIsSelected = false;
 
     public static Intent newIntent(Context context, ArrayList<Res_Photos.List> arrayList,
                                    int position) {
@@ -81,9 +87,19 @@ public class Activity_PhotoDetails extends BaseActivity implements Listener_Phot
 
         photoDetailPhotoName.setText(mPhotosList.get(mArrayPosition).getPhotoName());
 
+        photoDetailsDescriptionTv.setText(mPhotosList.get(mArrayPosition).getPhotoDescription());
+        fetchPhotoDetails(mPhotosList.get(mArrayPosition).getId());
 
     }
 
+    private void fetchPhotoDetails(String id) {
+        Controller_FetchPhotoDetails controllerFetchPhotoDetails = new Controller_FetchPhotoDetails();
+        Req_FetchPhotoDetails reqFetchPhotoDetails = new Req_FetchPhotoDetails();
+        reqFetchPhotoDetails.setId(id);
+        reqFetchPhotoDetails.setUsername(MySharedPreferences.getStoredUsername(this));
+        controllerFetchPhotoDetails.startFetching(this, reqFetchPhotoDetails);
+
+    }
 
     private void saveAndLikePhoto(String fragmentCallBack) {
         Contoller_AddSaveAndFavrt contoller_addSaveAndFavrt = new Contoller_AddSaveAndFavrt();
@@ -103,6 +119,15 @@ public class Activity_PhotoDetails extends BaseActivity implements Listener_Phot
         contoller_addSaveAndFavrt.startFetching(this, req_AddSaveAndFavrt);
     }
 
+    private void deleteSavedAndLikedPhoto(String photoName, String fragmentCallBack) {
+        Controller_DeleteSavedAndFavrt controllerDeleteSavedAndFavrt = new Controller_DeleteSavedAndFavrt();
+        Req_DeleteSavedAndLiked deleteSavedAndLiked = new Req_DeleteSavedAndLiked();
+        deleteSavedAndLiked.setFragmentCallBack(fragmentCallBack);
+        deleteSavedAndLiked.setPhotoname(photoName);
+        deleteSavedAndLiked.setUsername(MySharedPreferences.getStoredUsername(this));
+        controllerDeleteSavedAndFavrt.startFetching(this, deleteSavedAndLiked);
+    }
+
     @Override
     public void handleSuccessData(BaseModel resModel) {
 
@@ -111,9 +136,25 @@ public class Activity_PhotoDetails extends BaseActivity implements Listener_Phot
                 Res_Result res_result = (Res_Result) resModel;
                 if (res_result.getResult().
                         equalsIgnoreCase("Insert Successful")) {
-                    Toast.makeText(this, "Successful", Toast.LENGTH_SHORT).show();
+                    photoDetailsFavourite.setImageDrawable(this.getResources().getDrawable(R.drawable.favourite));
+                    Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show();
+                } else if (res_result.getResult().
+                        equalsIgnoreCase(Const.RES_FETCH_LIKE_DETAIL_TRUE)) {
+                    photoDetailsFavourite.setImageDrawable(this.getResources().getDrawable(R.drawable.favourite));
+                    mIsSelected = true;
+                } else if (res_result.getResult().
+                        equalsIgnoreCase(Const.RES_FETCH_LIKE_DETAIL_FALSE)) {
+                    photoDetailsFavourite.setImageDrawable(this.getResources().getDrawable(R.drawable.liked_inactive));
+                } else if (res_result.getResult().equalsIgnoreCase(Const.RES_DELETE_LIKE_SAVED_PHOTO_TRUE)) {
+                    photoDetailsFavourite.setImageDrawable(this.getResources().getDrawable(R.drawable.liked_inactive));
+                    mIsSelected = false;
+
+                } else if (res_result.getResult().equalsIgnoreCase(Const.RES_DELETE_LIKE_SAVED_PHOTO_FALSE)) {
+                    photoDetailsFavourite.setImageDrawable(this.getResources().getDrawable(R.drawable.favourite));
+                    mIsSelected = true;
                 } else {
                     Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+
                 }
             }
         }
@@ -130,15 +171,24 @@ public class Activity_PhotoDetails extends BaseActivity implements Listener_Phot
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.photo_details_save_btn:
-                saveAndLikePhoto("Save");
-                Toast.makeText(this, "Saving Photo...", Toast.LENGTH_SHORT).show();
+                /*if(!mIsSelected) {
+                    saveAndLikePhoto("Save");
+                }else {
+                    deleteSavedAndLikedPhoto(mPhotosList.get(mArrayPosition).getId(),"Favourite");
+                    Toast.makeText(this, "Saving Photo...", Toast.LENGTH_SHORT).show();
+                }*/
                 break;
             case R.id.photo_details_favourite:
-                saveAndLikePhoto("Like");
-                Toast.makeText(this, "Adding to favourites..", Toast.LENGTH_SHORT).show();
+                if (!mIsSelected) {
+                    saveAndLikePhoto("Like");
+                    mIsSelected = true;
+                } else {
+                    deleteSavedAndLikedPhoto(mPhotosList.get(mArrayPosition).getPhotoName(), "Like");
+                    mIsSelected = false;
+                }
                 break;
             case R.id.photo_details_quote_inquiry:
-                startActivity(Activity_QuoteInquiry.newIntent(this,mPhotosList,mArrayPosition));
+                startActivity(Activity_QuoteInquiry.newIntent(this, mPhotosList, mArrayPosition));
                 break;
         }
     }

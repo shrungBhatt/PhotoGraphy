@@ -39,6 +39,9 @@ public class Res_Photos extends BaseModel {
         @SerializedName("inquiry_message")
         @Expose
         private String inquiryMessage;
+        @SerializedName("inquiry_reply")
+        @Expose
+        private String inquiryReply;
         @SerializedName("photo_url")
         @Expose
         private String photoUrl;
@@ -68,6 +71,14 @@ public class Res_Photos extends BaseModel {
         private String inquiryAuthor;
         @SerializedName("is_selected")
         private boolean isSelected;
+
+        public String getInquiryReply() {
+            return inquiryReply;
+        }
+
+        public void setInquiryReply(String inquiryReply) {
+            this.inquiryReply = inquiryReply;
+        }
 
         public boolean isSelected() {
             return isSelected;

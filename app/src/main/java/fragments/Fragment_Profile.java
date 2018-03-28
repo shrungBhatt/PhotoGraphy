@@ -71,7 +71,7 @@ public class Fragment_Profile extends BaseFragment implements TabLayout.OnTabSel
 
         if (mFragmentManager != null) {
             mFragmentManager.beginTransaction().replace(R.id.profile_fragment_container,
-                    new Fragment_Tagged()).commit();
+                    new Fragment_Saved()).commit();
         }
     }
 

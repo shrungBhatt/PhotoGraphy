@@ -103,10 +103,16 @@ public interface APIManager {
                      Callback<String> callback);
 
     @FormUrlEncoded
-    @POST(URLGenerator.FETCH_PHOTO_DETAILS)
-    void fetchPhotoDetails(@Field("id")String id,
-                           @Field("username")String userName,
-                           Callback<String> callback);
+    @POST(URLGenerator.FETCH_LIKED_PHOTO_DETAILS)
+    void fetchLikedPhotoDetails(@Field("photo_name")String photoName,
+                                @Field("username")String userName,
+                                Callback<String> callback);
+
+    @FormUrlEncoded
+    @POST(URLGenerator.FETCH_SAVED_PHOTO_DETAILS)
+    void fetchSavedPhotoDetails(@Field("photo_name")String photoName,
+                                @Field("username")String userName,
+                                Callback<String> callback);
 
     @FormUrlEncoded
     @POST(URLGenerator.DELETE_LIKED_PHOTOS)

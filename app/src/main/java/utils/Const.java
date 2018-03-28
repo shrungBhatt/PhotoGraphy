@@ -17,6 +17,10 @@ public class Const {
 
     public static final String RES_FETCH_LIKE_DETAIL_FALSE = "0";
 
+    public static final String RES_FETCH_SAVE_DETAIL_TRUE = "TRUE";
+
+    public static final String RES_FETCH_SAVE_DETAIL_FALSE = "FALSE";
+
     public static final String RES_DELETE_LIKE_SAVED_PHOTO_TRUE  = "Deleted";
 
     public static final String RES_DELETE_LIKE_SAVED_PHOTO_FALSE = "Error";

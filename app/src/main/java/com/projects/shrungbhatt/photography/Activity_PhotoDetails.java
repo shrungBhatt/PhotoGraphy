@@ -17,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import controller.Contoller_AddSaveAndFavrt;
+import controller.Controller_DeleteSaved;
 import controller.Controller_DeleteSavedAndFavrt;
 import controller.Controller_FetchPhotoDetails;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -27,6 +28,7 @@ import model.Req_DeleteSavedAndLiked;
 import model.Req_FetchPhotoDetails;
 import model.Res_Photos;
 import model.Res_Result;
+import model.Res_Result1;
 import utils.Const;
 import utils.MySharedPreferences;
 
@@ -59,7 +61,8 @@ public class Activity_PhotoDetails extends BaseActivity implements Listener_Phot
     private PhotosBank photosBank;
     private int mArrayPosition;
     private ArrayList<Res_Photos.List> mPhotosList;
-    private boolean mIsSelected = false;
+    private boolean mIsLikeSelected = false;
+    private boolean mIsSaveSelected = false;
 
     public static Intent newIntent(Context context, ArrayList<Res_Photos.List> arrayList,
                                    int position) {
@@ -88,14 +91,16 @@ public class Activity_PhotoDetails extends BaseActivity implements Listener_Phot
         photoDetailPhotoName.setText(mPhotosList.get(mArrayPosition).getPhotoName());
 
         photoDetailsDescriptionTv.setText(mPhotosList.get(mArrayPosition).getPhotoDescription());
-        fetchPhotoDetails(mPhotosList.get(mArrayPosition).getId());
+        fetchPhotoDetails(mPhotosList.get(mArrayPosition).getPhotoName(),"Like");
+        fetchPhotoDetails(mPhotosList.get(mArrayPosition).getPhotoName(),"Save");
 
     }
 
-    private void fetchPhotoDetails(String id) {
+    private void fetchPhotoDetails(String photoName,String fragmentCallBack) {
         Controller_FetchPhotoDetails controllerFetchPhotoDetails = new Controller_FetchPhotoDetails();
         Req_FetchPhotoDetails reqFetchPhotoDetails = new Req_FetchPhotoDetails();
-        reqFetchPhotoDetails.setId(id);
+        reqFetchPhotoDetails.setPhotoname(photoName);
+        reqFetchPhotoDetails.setFragmentCallback(fragmentCallBack);
         reqFetchPhotoDetails.setUsername(MySharedPreferences.getStoredUsername(this));
         controllerFetchPhotoDetails.startFetching(this, reqFetchPhotoDetails);
 
@@ -128,6 +133,17 @@ public class Activity_PhotoDetails extends BaseActivity implements Listener_Phot
         controllerDeleteSavedAndFavrt.startFetching(this, deleteSavedAndLiked);
     }
 
+    private void deleteSavedPhoto(String photoName, String fragmentCallBack) {
+        Controller_DeleteSaved controllerDeleteSaved = new Controller_DeleteSaved();
+        Req_DeleteSavedAndLiked deleteSavedAndLiked = new Req_DeleteSavedAndLiked();
+        deleteSavedAndLiked.setFragmentCallBack(fragmentCallBack);
+        deleteSavedAndLiked.setPhotoname(photoName);
+        deleteSavedAndLiked.setUsername(MySharedPreferences.getStoredUsername(this));
+        controllerDeleteSaved.startFetching(this, deleteSavedAndLiked);
+    }
+
+
+
     @Override
     public void handleSuccessData(BaseModel resModel) {
 
@@ -136,26 +152,59 @@ public class Activity_PhotoDetails extends BaseActivity implements Listener_Phot
                 Res_Result res_result = (Res_Result) resModel;
                 if (res_result.getResult().
                         equalsIgnoreCase("Insert Successful")) {
+
                     photoDetailsFavourite.setImageDrawable(this.getResources().getDrawable(R.drawable.favourite));
+                    photoDetailsSaveBtn.setImageDrawable(this.getResources().getDrawable(R.drawable.saved_active));
                     Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show();
+
                 } else if (res_result.getResult().
+
                         equalsIgnoreCase(Const.RES_FETCH_LIKE_DETAIL_TRUE)) {
                     photoDetailsFavourite.setImageDrawable(this.getResources().getDrawable(R.drawable.favourite));
-                    mIsSelected = true;
+                    mIsLikeSelected = true;
+
                 } else if (res_result.getResult().
                         equalsIgnoreCase(Const.RES_FETCH_LIKE_DETAIL_FALSE)) {
+
                     photoDetailsFavourite.setImageDrawable(this.getResources().getDrawable(R.drawable.liked_inactive));
+
                 } else if (res_result.getResult().equalsIgnoreCase(Const.RES_DELETE_LIKE_SAVED_PHOTO_TRUE)) {
+
                     photoDetailsFavourite.setImageDrawable(this.getResources().getDrawable(R.drawable.liked_inactive));
-                    mIsSelected = false;
+                    mIsLikeSelected = false;
 
                 } else if (res_result.getResult().equalsIgnoreCase(Const.RES_DELETE_LIKE_SAVED_PHOTO_FALSE)) {
+
                     photoDetailsFavourite.setImageDrawable(this.getResources().getDrawable(R.drawable.favourite));
-                    mIsSelected = true;
+                    mIsLikeSelected = true;
+
+                }else if(res_result.getResult().equalsIgnoreCase(Const.RES_FETCH_SAVE_DETAIL_TRUE)){
+
+                    photoDetailsSaveBtn.setImageDrawable(this.getResources().getDrawable(R.drawable.saved_active));
+                    mIsSaveSelected = true;
+
+                }else if(res_result.getResult().equalsIgnoreCase(Const.RES_FETCH_SAVE_DETAIL_FALSE)){
+
+                    photoDetailsSaveBtn.setImageDrawable(this.getResources().getDrawable(R.drawable.save_photo));
+
                 } else {
                     Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
 
                 }
+            }else if(resModel instanceof Res_Result1){
+                Res_Result1 res_result1 = (Res_Result1)resModel;
+
+                if (res_result1.getResult().
+                        equalsIgnoreCase(Const.RES_DELETE_LIKE_SAVED_PHOTO_FALSE)) {
+                    photoDetailsSaveBtn.setImageDrawable(this.getResources().getDrawable(R.drawable.saved_active));
+                    mIsSaveSelected = true;
+                }else if (res_result1.getResult().
+                        equalsIgnoreCase(Const.RES_DELETE_LIKE_SAVED_PHOTO_TRUE)) {
+                    photoDetailsSaveBtn.setImageDrawable(this.getResources().getDrawable(R.drawable.save_photo));
+                    mIsSaveSelected = false;
+                }
+
+
             }
         }
 
@@ -171,20 +220,21 @@ public class Activity_PhotoDetails extends BaseActivity implements Listener_Phot
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.photo_details_save_btn:
-                /*if(!mIsSelected) {
+                if(!mIsSaveSelected) {
                     saveAndLikePhoto("Save");
+                    mIsSaveSelected = true;
                 }else {
-                    deleteSavedAndLikedPhoto(mPhotosList.get(mArrayPosition).getId(),"Favourite");
-                    Toast.makeText(this, "Saving Photo...", Toast.LENGTH_SHORT).show();
-                }*/
+                    deleteSavedPhoto(mPhotosList.get(mArrayPosition).getPhotoName(),"Save");
+                    mIsSaveSelected = false;
+                }
                 break;
             case R.id.photo_details_favourite:
-                if (!mIsSelected) {
+                if (!mIsLikeSelected) {
                     saveAndLikePhoto("Like");
-                    mIsSelected = true;
+                    mIsLikeSelected = true;
                 } else {
                     deleteSavedAndLikedPhoto(mPhotosList.get(mArrayPosition).getPhotoName(), "Like");
-                    mIsSelected = false;
+                    mIsLikeSelected = false;
                 }
                 break;
             case R.id.photo_details_quote_inquiry:

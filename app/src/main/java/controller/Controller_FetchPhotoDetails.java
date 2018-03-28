@@ -4,7 +4,6 @@ import org.json.JSONObject;
 
 import model.BaseModel;
 import model.Req_FetchPhotoDetails;
-import model.Req_LogOnUser;
 import model.Res_Result;
 import parser.BaseParser;
 import parser.Parser_Result;
@@ -28,8 +27,20 @@ public class Controller_FetchPhotoDetails extends BaseController {
         this.reqModel = model;
         this.baseParser = new Parser_Result();
         Req_FetchPhotoDetails reqFetchPhotoDetails = (Req_FetchPhotoDetails) reqModel;
-        apiManager.fetchPhotoDetails(reqFetchPhotoDetails.getId(),
-                reqFetchPhotoDetails.getUsername(),
-                callback);
+
+        switch (reqFetchPhotoDetails.getFragmentCallback()) {
+
+            case "Like":
+                apiManager.fetchLikedPhotoDetails(reqFetchPhotoDetails.getPhotoname(),
+                        reqFetchPhotoDetails.getUsername(),
+                        callback);
+                break;
+
+            case "Save":
+                apiManager.fetchSavedPhotoDetails(reqFetchPhotoDetails.getPhotoname(),
+                        reqFetchPhotoDetails.getUsername(),
+                        callback);
+                break;
+        }
     }
 }

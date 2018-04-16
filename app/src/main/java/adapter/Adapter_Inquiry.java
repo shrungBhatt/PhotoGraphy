@@ -4,9 +4,13 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.projects.shrungbhatt.photography.R;
 
@@ -16,6 +20,7 @@ import java.util.Collections;
 
 import assets_bank.PhotosBank;
 import butterknife.BindView;
+import listeners.Listener_ReplySend;
 import model.Res_Photos;
 import utils.Converter;
 
@@ -29,10 +34,13 @@ public class Adapter_Inquiry extends RecyclerView.Adapter<Adapter_Inquiry.Inquir
     private Context mContext;
     private ArrayList<Res_Photos.List> mInquiriesList;
     private PhotosBank photosBank;
+    private Listener_ReplySend mListenerReplySend;
 
-    public Adapter_Inquiry(Context context, ArrayList<Res_Photos.List> list){
+    public Adapter_Inquiry(Context context, ArrayList<Res_Photos.List> list,
+                           Listener_ReplySend listenerReplySend){
         mContext = context;
         mInquiriesList = list;
+        mListenerReplySend = listenerReplySend;
         photosBank = new PhotosBank(context);
         if(mInquiriesList != null) {
             Collections.reverse(mInquiriesList);
@@ -49,7 +57,7 @@ public class Adapter_Inquiry extends RecyclerView.Adapter<Adapter_Inquiry.Inquir
     }
 
     @Override
-    public void onBindViewHolder(Inquiry_ViewHolder holder, int position) {
+    public void onBindViewHolder(final Inquiry_ViewHolder holder, final int position) {
 
         Bitmap bitmap = photosBank.loadDrawable(mInquiriesList.get(position).getPhotoUrl());
 
@@ -60,6 +68,16 @@ public class Adapter_Inquiry extends RecyclerView.Adapter<Adapter_Inquiry.Inquir
         holder.mPhotoNameTv.setText(mInquiriesList.get(position).getPhotoName());
         holder.mInquiryAuthor.setText(mInquiriesList.get(position).getInquiryAuthor());
 
+        holder.mSendReply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!holder.mInquiryReply.getText().toString().trim().isEmpty()){
+                    mListenerReplySend.sendReply(position,holder.mInquiryReply.getText().toString());
+                }else{
+                    Toast.makeText(mContext,"Enter a reply",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
     }
 
@@ -71,15 +89,13 @@ public class Adapter_Inquiry extends RecyclerView.Adapter<Adapter_Inquiry.Inquir
     class Inquiry_ViewHolder extends RecyclerView.ViewHolder {
 
 
-        @BindView(R.id.photo_inquiry_list_item_image_view)
         ImageView mPhotoInquiryListItemImageView;
-        @BindView(R.id.photo_name_list_item_textView)
         TextView mPhotoNameTv;
-        @BindView(R.id.list_item_likes_count)
         TextView mListItemLikesCount;
-        @BindView(R.id.list_item_inquiry_tv)
         TextView mListItemInquiryTv;
         TextView mInquiryAuthor;
+        EditText mInquiryReply;
+        ImageButton mSendReply;
 
         Inquiry_ViewHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.inquires_list_item, parent, false));
@@ -95,6 +111,9 @@ public class Adapter_Inquiry extends RecyclerView.Adapter<Adapter_Inquiry.Inquir
 
             mInquiryAuthor= itemView.findViewById(R.id.inquiry_from_list_item_textView);
 
+            mInquiryReply = itemView.findViewById(R.id.inquiry_reply_edit_text);
+
+            mSendReply = itemView.findViewById(R.id.inquiry_send_button);
 
         }
 

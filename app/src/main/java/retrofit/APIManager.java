@@ -125,4 +125,11 @@ public interface APIManager {
     void deleteSavedPhotos(@Field("user_name")String userName,
                            @Field("photo_name")String photoName,
                            Callback<String> callback);
+
+    @FormUrlEncoded
+    @POST(URLGenerator.SUBMIT_INQUIRY_REPlY)
+    void submitInquiryReply(@Field("reply")String reply,
+                            @Field("id")String id,
+                            Callback<String> callback);
+
 }

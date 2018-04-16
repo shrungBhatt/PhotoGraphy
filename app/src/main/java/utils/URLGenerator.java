@@ -56,4 +56,6 @@ public class URLGenerator {
     public static final String DELETE_LIKED_PHOTOS = "/delete_saved_liked_photos.php";
 
     public static final String DELETE_SAVED_PHOTOS = "/delete_saved_photos.php";
+
+    public static final String SUBMIT_INQUIRY_REPlY = "/photography_submit_inquiry_reply.php";
 }

@@ -139,24 +139,29 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp"
                 android:orientation="horizontal">
 
                 <EditText
+                    android:id="@+id/inquiry_reply_edit_text"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
                     android:inputType="text"
+                    android:layout_gravity="bottom"
                     android:textColor="@color/colorPrimaryDark"
                     android:hint="Reply" />
 
                 <ImageButton
                     android:id="@+id/inquiry_send_button"
-                    android:background="@android:color/transparent"
+                    android:background="@drawable/circlelayout_dark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="12dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="2dp"
                     android:src="@drawable/fab_send_icon"/>
             </LinearLayout>
 

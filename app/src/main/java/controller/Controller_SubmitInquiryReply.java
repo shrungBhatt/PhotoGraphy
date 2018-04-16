@@ -31,6 +31,6 @@ public class Controller_SubmitInquiryReply extends BaseController {
         this.baseParser = new Parser_Result();
         Req_SubmitInquiryReply reqSubmitInquiryReply = (Req_SubmitInquiryReply) model;
         apiManager.submitInquiryReply(reqSubmitInquiryReply.getReply(),
-                reqSubmitInquiryReply.getId(),callback);
+                reqSubmitInquiryReply.getId(),reqSubmitInquiryReply.getReplyAuthor(),callback);
     }
 }

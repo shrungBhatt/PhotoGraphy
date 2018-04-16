@@ -2,6 +2,7 @@ package model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.mobsandgeeks.saripaar.annotation.Email;
 
 import java.util.ArrayList;
 
@@ -71,6 +72,18 @@ public class Res_Photos extends BaseModel {
         private String inquiryAuthor;
         @SerializedName("is_selected")
         private boolean isSelected;
+        @SerializedName("reply_author")
+        @Expose
+        private String replyAuthor;
+
+
+        public String getReplyAuthor() {
+            return replyAuthor;
+        }
+
+        public void setReplyAuthor(String replyAuthor) {
+            this.replyAuthor = replyAuthor;
+        }
 
         public String getInquiryReply() {
             return inquiryReply;

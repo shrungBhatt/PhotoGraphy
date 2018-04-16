@@ -69,6 +69,11 @@
             android:windowSoftInputMode="stateHidden|adjustPan"
             android:parentActivityName=".Activity_PhotoDetails"/>
 
+        <activity android:name=".Activity_UserInquiries"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+
+
     </application>
 
 </manifest>

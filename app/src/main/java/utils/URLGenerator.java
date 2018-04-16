@@ -58,4 +58,6 @@ public class URLGenerator {
     public static final String DELETE_SAVED_PHOTOS = "/delete_saved_photos.php";
 
     public static final String SUBMIT_INQUIRY_REPlY = "/photography_submit_inquiry_reply.php";
+
+    public static final String FETCH_USER_INQUIRIES = "/fetch_user_inquiries.php";
 }

@@ -130,6 +130,11 @@ public interface APIManager {
     @POST(URLGenerator.SUBMIT_INQUIRY_REPlY)
     void submitInquiryReply(@Field("reply")String reply,
                             @Field("id")String id,
+                            @Field("reply_author")String replyAuthor,
+                            Callback<String> callback);
+    @FormUrlEncoded
+    @POST(URLGenerator.FETCH_USER_INQUIRIES)
+    void fetchUserInquiries(@Field("user_name")String userName,
                             Callback<String> callback);
 
 }

@@ -24,6 +24,7 @@ import model.Req_Inquires;
 import model.Req_SubmitInquiryReply;
 import model.Res_Photos;
 import model.Res_Result;
+import utils.MySharedPreferences;
 
 /**
  * Created by jigsaw on 25/2/18.
@@ -106,6 +107,7 @@ public class Fragment_Inquires extends BaseFragment implements Listener_ReplySen
         Req_SubmitInquiryReply reqSubmitInquiryReply = new Req_SubmitInquiryReply();
         reqSubmitInquiryReply.setReply(reply);
         reqSubmitInquiryReply.setId(mResPhotos.getList().get(position).getId());
+        reqSubmitInquiryReply.setReplyAuthor(MySharedPreferences.getStoredUsername(getActivity()));
         controllerSubmitInquiryReply.startFetching(this,reqSubmitInquiryReply);
     }
 }

@@ -1,21 +1,24 @@
 package fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.projects.shrungbhatt.photography.Activity_UserInquiries;
 import com.projects.shrungbhatt.photography.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import de.hdodenhof.circleimageview.CircleImageView;
 import model.BaseModel;
@@ -38,6 +41,8 @@ public class Fragment_Profile extends BaseFragment implements TabLayout.OnTabSel
     FrameLayout profileFragmentContainer;
     Unbinder unbinder;
     FragmentManager mFragmentManager;
+    @BindView(R.id.user_profile_inquiries_button)
+    ImageView mUserProfileInquiriesButotn;
 
     @Nullable
     @Override
@@ -112,5 +117,10 @@ public class Fragment_Profile extends BaseFragment implements TabLayout.OnTabSel
     @Override
     public void handleZeroData(BaseModel reqModel) {
 
+    }
+
+    @OnClick(R.id.user_profile_inquiries_button)
+    public void onViewClicked() {
+        startActivity(new Intent(getActivity(), Activity_UserInquiries.class));
     }
 }

@@ -50,6 +50,7 @@ public class Adapter_CategoriesRecyclerView extends
 
 //        holder.listItemCategoryImage.setImageBitmap(bitmap);
 
+
         Picasso.get().load(mArrayList.get(position).getPhotoUrl()).
                 placeholder(mContext.getResources().getDrawable(R.drawable.no_image)).
                 into(holder.listItemCategoryImage);
